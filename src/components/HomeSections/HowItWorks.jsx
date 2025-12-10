@@ -24,7 +24,7 @@ import { ClipboardList, Users, CheckCircle } from "lucide-react";
     <div className="py-20 ">
       <h2 className="text-3xl text-[#9435E7] font-semibold text-center mb-12">How It Works</h2>
 
-      <div className="max-w-6xl mx-auto grid md:grid-cols-3 gap-10 px-6">
+      <div className="max-w-6xl mx-auto grid md:grid-cols-3 gap-10 px-6  md:px-0">
         {steps.map((step, i) => (
           <motion.div
             key={i}

@@ -47,7 +47,7 @@ const features = [
 const FeaturesShowcase = () => {
   return (
     <section className="py-20 " id="features">
-      <div className="max-w-7xl mx-auto px-6 md:px-10 lg:px-16">
+      <div className="max-w-7xl mx-auto px-6 md:px-0 lg:px-16">
         {/* Header */}
         <div className="text-center mb-14">
           <h2 className="text-3xl md:text-4xl font-extrabold text-[#9435E7]">

@@ -35,7 +35,7 @@ import { Star } from "lucide-react";
   return (
     <div className="w-full py-20 ">
       {/* Stats Section */}
-      <div className="max-w-6xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-6 mb-20 text-center ">
+      <div className="max-w-6xl mx-auto px-5 md:px-0 grid grid-cols-2 md:grid-cols-4 gap-6 mb-20 text-center ">
         {stats.map((stat, i) => (
           <motion.div
             key={i}
@@ -51,7 +51,7 @@ import { Star } from "lucide-react";
       </div>
 
       {/* Testimonials Section */}
-      <div className="max-w-6xl mx-auto px-6">
+      <div className="max-w-6xl mx-auto px-5 md:px-0">
         <h2 className="text-3xl font-semibold text-[#9435E7] text-center mb-10">
           What Our Clients Say
         </h2>

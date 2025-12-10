@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { ChevronDown } from "lucide-react";
+import { motion } from "framer-motion";
 
 const FAQ = () => {
   const faqs = [
@@ -31,22 +32,25 @@ const FAQ = () => {
 
       <div className="max-w-3xl mx-auto px-6 space-y-4">
         {faqs.map((item, i) => (
-          <div
+          <motion.div
             key={i}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, delay: i * 0.4 }}
             className="bg-[#18212F] border border-[#9435E7] rounded-xl p-5 shadow-sm cursor-pointer"
             onClick={() => setOpen(open === i ? null : i)}
           >
             <div className="flex justify-between items-center">
               <h3 className="font-semibold text-gray-200">{item.q}</h3>
               <ChevronDown
-                className={`w-5 h-5 transition-transform ${
+                className={`w-5 h-5 transition-transform text-[#9435E7] ${
                   open === i ? "rotate-180" : ""
                 }`}
               />
             </div>
 
-            {open === i && <p className="mt-3 text-gray-600">{item.a}</p>}
-          </div>
+            {open === i && <p className="mt-3 text-gray-500">{item.a}</p>}
+          </motion.div>
         ))}
       </div>
     </div>

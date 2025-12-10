@@ -10,7 +10,7 @@ import TestimonialsStats from '../../components/HomeSections/Testimonials'
 
 const Home = () => {
   return (
-    <div>
+    <div className=''>
       {/* <Plants /> */}
       {/* More components */}
       <HeroBanner/>
