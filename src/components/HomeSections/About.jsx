@@ -1,4 +1,5 @@
 import { ShieldCheck, Layers, Users, BarChart3 } from "lucide-react";
+import { motion } from "framer-motion";
 
 const AboutSection = () => {
   return (
@@ -18,7 +19,12 @@ const AboutSection = () => {
         {/* Benefits grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
           {/* Card 1 */}
-          <div className="bg-[#18212F] border-[#9435E7] shadow-md rounded-xl p-6 hover:shadow-lg transition duration-300 border ">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, delay: 0.1 }}
+            className="bg-[#18212F] border-[#9435E7] shadow-md rounded-xl p-6 hover:shadow-lg transition duration-300 border "
+          >
             <div className="flex items-center justify-center w-14 h-14 bg-blue-100 text-blue-600 rounded-xl mx-auto">
               <ShieldCheck size={32} />
             </div>
@@ -29,10 +35,15 @@ const AboutSection = () => {
               Monitor and protect company assets with robust security and
               accurate real-time visibility.
             </p>
-          </div>
+          </motion.div>
 
           {/* Card 2 */}
-          <div className="bg-[#18212F] border-[#9435E7] shadow-md rounded-xl p-6 hover:shadow-lg transition duration-300 border">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, delay: 0.2 }}
+            className="bg-[#18212F] border-[#9435E7] shadow-md rounded-xl p-6 hover:shadow-lg transition duration-300 border"
+          >
             <div className="flex items-center justify-center w-14 h-14 bg-green-100 text-green-600 rounded-xl mx-auto">
               <Layers size={32} />
             </div>
@@ -43,10 +54,15 @@ const AboutSection = () => {
               Easily assign and manage hardware or resources between employees
               and departments.
             </p>
-          </div>
+          </motion.div>
 
           {/* Card 3 */}
-          <div className="bg-[#18212F] border-[#9435E7] shadow-md rounded-xl p-6 hover:shadow-lg transition duration-300 border ">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, delay: 0.3 }}
+            className="bg-[#18212F] border-[#9435E7] shadow-md rounded-xl p-6 hover:shadow-lg transition duration-300 border "
+          >
             <div className="flex items-center justify-center w-14 h-14 bg-purple-100 text-purple-600 rounded-xl mx-auto">
               <Users size={32} />
             </div>
@@ -57,10 +73,15 @@ const AboutSection = () => {
               HR managers and employees can seamlessly communicate and manage
               requests within one platform.
             </p>
-          </div>
+          </motion.div>
 
           {/* Card 4 */}
-          <div className="bg-[#18212F] border-[#9435E7] shadow-md rounded-xl p-6 hover:shadow-lg transition duration-300 border ">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, delay: 0.4 }}
+            className="bg-[#18212F] border-[#9435E7] shadow-md rounded-xl p-6 hover:shadow-lg transition duration-300 border "
+          >
             <div className="flex items-center justify-center w-14 h-14 bg-yellow-100 text-yellow-600 rounded-xl mx-auto">
               <BarChart3 size={32} />
             </div>
@@ -71,7 +92,7 @@ const AboutSection = () => {
               Get clear analytics and reports to make strategic decisions about
               asset lifecycle and usage.
             </p>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

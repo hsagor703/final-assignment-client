@@ -1,3 +1,4 @@
+import {motion} from 'framer-motion'
 const packagesData = [
   {
     name: "Basic",
@@ -9,21 +10,13 @@ const packagesData = [
     name: "Standard",
     employeeLimit: 10,
     price: 8,
-    features: [
-      "All Basic features",
-      "Advanced Analytics",
-      "Priority Support",
-    ],
+    features: ["All Basic features", "Advanced Analytics", "Priority Support"],
   },
   {
     name: "Premium",
     employeeLimit: 20,
     price: 15,
-    features: [
-      "All Standard features",
-      "Custom Branding",
-      "24/7 Support",
-    ],
+    features: ["All Standard features", "Custom Branding", "24/7 Support"],
   },
 ];
 
@@ -31,22 +24,25 @@ const Packages = () => {
   return (
     <section className="py-20 " id="pricing">
       <div className="max-w-7xl mx-auto px-6 md:px-10 lg:px-16">
-
         {/* Section Header */}
         <div className="text-center mb-14">
           <h2 className="text-3xl md:text-4xl font-extrabold text-[#9435E7]">
             Choose Your Package
           </h2>
           <p className="mt-4 text-gray-600 text-lg max-w-2xl mx-auto">
-            Flexible and affordable plans designed to scale with your company’s growth.
+            Flexible and affordable plans designed to scale with your company’s
+            growth.
           </p>
         </div>
 
         {/* Pricing cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-          {packagesData.map((pack, index) => (
-            <div
-              key={index}
+          {packagesData.map((pack, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: i * 0.1 }}
               className="border border-[#9435E7] shadow-md rounded-2xl p-7 hover:shadow-xl transition duration-300 bg-[#18212F]"
             >
               <h3 className="text-2xl font-bold text-gray-300  text-center">
@@ -70,11 +66,9 @@ const Packages = () => {
 
               <ul className="mt-6 space-y-3">
                 {pack.features.map((feature, i) => (
-                  <li
-                    key={i}
-                    className="flex items-center gap-2 text-gray-500"
-                  >
-                    <span className="text-[#9435E7] font-bold">✓</span> {feature}
+                  <li key={i} className="flex items-center gap-2 text-gray-500">
+                    <span className="text-[#9435E7] font-bold">✓</span>{" "}
+                    {feature}
                   </li>
                 ))}
               </ul>
@@ -84,10 +78,9 @@ const Packages = () => {
                   Select Plan
                 </button>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
-
       </div>
     </section>
   );

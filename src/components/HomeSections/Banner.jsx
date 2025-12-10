@@ -81,7 +81,7 @@ const HeroBanner = ({
             >
               <a
                 href={primaryCta.href}
-                className="inline-flex items-center justify-center rounded-md bg-[#9435E7] hover:bg-sky-700 text-white font-semibold px-5 py-3 text-sm shadow-md focus:outline-none focus:ring-2 focus:ring-sky-400 focus:ring-offset-2"
+                className="inline-flex items-center justify-center rounded-md bg-[#9435E7] hover:bg-[#9435E730] text-white font-semibold px-5 py-3 text-sm shadow-md focus:outline-none focus:ring-2 focus:ring-sky-400 focus:ring-offset-2"
                 aria-label={primaryCta.label}
               >
                 {primaryCta.label}
@@ -89,7 +89,7 @@ const HeroBanner = ({
 
               <a
                 href={secondaryCta.href}
-                className="inline-flex items-center justify-center rounded-md border border-[#9435E7] bg-white/10 text-[#9435E7] px-5 py-3 text-sm hover:shadow-sm focus:outline-none focus:ring-2 focus:ring-[#9435E7]"
+                className="inline-flex items-center justify-center rounded-md border border-[#9435E7] bg-white/10 text-[#9435E7] px-5 py-3 text-sm hover:bg-[#9435E7] hover:text-gray-300 focus:outline-none focus:ring-2 focus:ring-[#9435E7]"
                 aria-label={secondaryCta.label}
               >
                 {secondaryCta.label}
