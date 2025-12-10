@@ -5,5 +5,7 @@
     font-family: "Inter", sans-serif;
 }
 
-
+a.active{
+    @apply border border-[#9435E7] text-[#9435E7] font-bold
+}
     /* background: #19142D; */

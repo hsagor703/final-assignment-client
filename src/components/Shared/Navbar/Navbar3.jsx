@@ -2,19 +2,27 @@ import React from "react";
 import Container from "../Container";
 import logo from "../../../assets/images/a-logo.png";
 import { Link, NavLink } from "react-router";
-// import { Link } from "lucide-react";
+import {  FaHome } from "react-icons/fa";
+import { FaPeopleGroup } from "react-icons/fa6";
+import { GrUserManager } from "react-icons/gr";
+
 
 const Navbar3 = () => {
   const links = (
     <>
       <li>
-        <NavLink>Home</NavLink>
+        <NavLink to={"/"}>
+          <FaHome size={18} /> Home
+        </NavLink>
       </li>
       <li>
-        <NavLink>Join as Employee</NavLink>
+        <NavLink to={"/employee"}>
+          <FaPeopleGroup size={18}/>
+          Join as Employee
+        </NavLink>
       </li>
       <li>
-        <NavLink>Join as HR Manager</NavLink>
+        <NavLink to={"/hrManager"}> <GrUserManager size={18}/>Join as HR Manager</NavLink>
       </li>
       <li className="dropdown">
         <div tabIndex={0} role="button" className=" ">
@@ -69,6 +77,10 @@ const Navbar3 = () => {
           </li>
         </ul>
       </li>
+      <li>
+        <NavLink to={'/dashboard'}>Dashboard</NavLink>
+      </li>
+     
     </>
   );
   return (
@@ -116,7 +128,9 @@ const Navbar3 = () => {
             <ul className="menu menu-horizontal px-1">{links}</ul>
           </div>
           <div className="navbar-end">
-            <a className="btn bg-[#9435E7] text-gray-200 border border-[#9435E7]">Button</a>
+            <Link to={'/login'} className="btn bg-[#9435E7] text-gray-200 border border-[#9435E7]">
+              login
+            </Link>
           </div>
         </div>
       </Container>
