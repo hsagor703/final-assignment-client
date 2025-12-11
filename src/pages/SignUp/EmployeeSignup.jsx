@@ -3,6 +3,7 @@ import useAuth from "../../hooks/useAuth";
 import { toast } from "react-hot-toast";
 import { TbFidgetSpinner } from "react-icons/tb";
 import { useForm } from "react-hook-form";
+import { imageUpload } from "../../ImageGenerate";
 
 const SignUp = () => {
   const { createUser, updateUserProfile, loading } = useAuth();
@@ -13,53 +14,29 @@ const SignUp = () => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors, isLoading },
   } = useForm();
 
-  const handleEmployee = (data) => {
-   console.log('from employee signin', data);
+  const handleEmployee = async (data) => {
+    const { email, password, name, image, date } = data;
+    const imageFile = image[0];
+    const imageURl = await imageUpload(imageFile);
+    await createUser(email, password)
+      .then((currentUser) => {
+        console.log("from createUser", currentUser);
+        navigate("/dashboard");
+        reset();
+        toast.success("create user successfully");
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+
+    await updateUserProfile(name, imageURl);
   };
 
-  // form submit handler
-  // const handleSubmit = async (event) => {
-  //   event.preventDefault();
-  //   const form = event.target;
-  //   const name = form.name.value;
-  //   const email = form.email.value;
-  //   const password = form.password.value;
 
-  //   try {
-  //     //2. User Registration
-  //     const result = await createUser(email, password);
-
-  //     //3. Save username & profile photo
-  //     await updateUserProfile(
-  //       name,
-  //       "https://lh3.googleusercontent.com/a/ACg8ocKUMU3XIX-JSUB80Gj_bYIWfYudpibgdwZE1xqmAGxHASgdvCZZ=s96-c"
-  //     );
-  //     console.log(result);
-
-  //     navigate(from, { replace: true });
-  //     toast.success("Signup Successful");
-  //   } catch (err) {
-  //     console.log(err);
-  //     toast.error(err?.message);
-  //   }
-  // };
-
-  // Handle Google Signin
-  // const handleGoogleSignIn = async () => {
-  //   try {
-  //     //User Registration using google
-  //     await signInWithGoogle();
-
-  //     navigate(from, { replace: true });
-  //     toast.success("Signup Successful");
-  //   } catch (err) {
-  //     console.log(err);
-  //     toast.error(err?.message);
-  //   }
-  // };
   return (
     <div className="flex justify-center items-center min-h-screen">
       <div className="flex flex-col max-w-md p-6 rounded-md sm:p-10 bg-gray-100/10 text-gray-900">
@@ -104,7 +81,7 @@ const SignUp = () => {
                 Profile Image
               </label>
               <input
-                {...register('image',{required:true})}
+                {...register("image", { required: true })}
                 type="file"
                 accept="image/*"
                 className="w-full px-3 py-2 border rounded-md border-[#9435E7] file:bg-[#9435E7] file:p-1 file:px-2 file:text-sm file:rounded-md focus:outline-[#9435E7] bg-[#9435E710] text-gray-300"
@@ -112,10 +89,9 @@ const SignUp = () => {
               <p className="mt-1 text-xs text-gray-400">
                 PNG, JPG or JPEG (max 2MB)
               </p>
-               {errors.image?.type === "required" && (
+              {errors.image?.type === "required" && (
                 <p className="text-red-500 text-sm">File is Required</p>
               )}
-              
             </div>
             <div>
               <label

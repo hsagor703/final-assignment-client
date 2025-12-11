@@ -2,15 +2,25 @@ import React from "react";
 import Container from "../Container";
 import logo from "../../../assets/images/a-logo.png";
 import { Link, NavLink } from "react-router";
-import {  FaHome } from "react-icons/fa";
+import { FaHome } from "react-icons/fa";
 import { FaPeopleGroup } from "react-icons/fa6";
 import { GrUserManager } from "react-icons/gr";
-
+import { RxDashboard } from "react-icons/rx";
+import useAuth from "../../../hooks/useAuth";
+import toast from "react-hot-toast";
+import avatarImg from '../../../assets/images/placeholder.jpg'
 
 const Navbar3 = () => {
+  const { user, logOut } = useAuth();
+
+  const handleLogout = () => {
+    logOut().then(() => {
+      toast.success("LogOut successfully");
+    });
+  };
   const links = (
     <>
-      <li>
+      {/* <li>
         <NavLink to={"/"}>
           <FaHome size={18} /> Home
         </NavLink>
@@ -23,10 +33,102 @@ const Navbar3 = () => {
       </li>
       <li>
         <NavLink to={"/hrManager"}> <GrUserManager size={18}/>Join as HR Manager</NavLink>
-      </li>
-      <li className="dropdown">
+      </li> */}
+
+      {user ? (
+        <>
+          <li>
+            <NavLink to={"/"}>
+              <FaHome size={18} /> Home
+            </NavLink>
+          </li>
+          <li className="dropdown">
+            <div tabIndex={0} role="button" className=" ">
+              <FaPeopleGroup /> Employee
+            </div>
+            <ul
+              tabIndex="-1"
+              className="dropdown-content menu bg-base-100/10 rounded-box z-1 w-52 p-2 shadow-sm"
+            >
+              <li>
+                <Link>My Assets</Link>
+              </li>
+              <li>
+                <Link>My Team</Link>
+              </li>
+              <li>
+                <Link>Request Asset</Link>
+              </li>
+              <li>
+                <Link>Profile</Link>
+              </li>
+              <li>
+                <Link>Logout</Link>
+              </li>
+            </ul>
+          </li>
+          <li className="dropdown">
+            <div tabIndex={0} role="button" className=" ">
+              <GrUserManager /> HR Manager
+            </div>
+            <ul
+              tabIndex="-1"
+              className="dropdown-content menu bg-base-100/10 rounded-box z-1 w-52 p-2 shadow-sm"
+            >
+              <li>
+                <Link>Asset List</Link>
+              </li>
+              <li>
+                <Link>Add Asset</Link>
+              </li>
+              <li>
+                <Link>All Requests</Link>
+              </li>
+              <li>
+                <Link>Employee List</Link>
+              </li>
+              <li>
+                <Link>Profile</Link>
+              </li>
+              <li>
+                <Link>Logout</Link>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <NavLink to={"/dashboard"}>
+              {" "}
+              <RxDashboard />
+              Dashboard
+            </NavLink>
+          </li>
+        </>
+      ) : (
+        <>
+          {" "}
+          <li>
+            <NavLink to={"/"}>
+              <FaHome size={18} /> Home
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to={"/employee"}>
+              <FaPeopleGroup size={18} />
+              Join as Employee
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to={"/hrManager"}>
+              {" "}
+              <GrUserManager size={18} />
+              Join as HR Manager
+            </NavLink>
+          </li>
+        </>
+      )}
+      {/* <li className="dropdown">
         <div tabIndex={0} role="button" className=" ">
-          Employee
+          <FaPeopleGroup/> Employee
         </div>
         <ul
           tabIndex="-1"
@@ -51,7 +153,7 @@ const Navbar3 = () => {
       </li>
       <li className="dropdown">
         <div tabIndex={0} role="button" className=" ">
-          HR Manager
+          <GrUserManager/> HR Manager
         </div>
         <ul
           tabIndex="-1"
@@ -78,9 +180,8 @@ const Navbar3 = () => {
         </ul>
       </li>
       <li>
-        <NavLink to={'/dashboard'}>Dashboard</NavLink>
-      </li>
-     
+        <NavLink to={'/dashboard'}> <RxDashboard />Dashboard</NavLink>
+      </li> */}
     </>
   );
   return (
@@ -128,9 +229,32 @@ const Navbar3 = () => {
             <ul className="menu menu-horizontal px-1">{links}</ul>
           </div>
           <div className="navbar-end">
-            <Link to={'/login'} className="btn bg-[#9435E7] text-gray-200 border border-[#9435E7]">
-              login
-            </Link>
+            <div className="hidden md:block">
+              {/* Avatar */}
+              <img
+                className="rounded-full mr-2 border border-[#9435E7]"
+                referrerPolicy="no-referrer"
+                src={user && user.photoURL ? user.photoURL : avatarImg}
+                alt="profile"
+                height="40"
+                width="40"
+              />
+            </div>
+            {user ? (
+              <button
+                onClick={handleLogout}
+                className="btn bg-[#9435E7] text-gray-200 border border-[#9435E7]"
+              >
+                Logout
+              </button>
+            ) : (
+              <Link
+                to={"/login"}
+                className="btn bg-[#9435E7] text-gray-200 border border-[#9435E7]"
+              >
+                login
+              </Link>
+            )}
           </div>
         </div>
       </Container>

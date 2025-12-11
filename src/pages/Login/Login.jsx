@@ -5,7 +5,7 @@ import { TbFidgetSpinner } from "react-icons/tb";
 import { useForm } from "react-hook-form";
 
 const Login = () => {
-  const { createUser, updateUserProfile, loading } = useAuth();
+  const { createUser, updateUserProfile, loading, signIn } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state || "/";
@@ -16,50 +16,15 @@ const Login = () => {
     formState: { errors, isLoading },
   } = useForm();
 
-  const handleEmployee = (data) => {
-   console.log(data);
+  const handleLogin = (data) => {
+    const {email, password} = data
+   signIn(email, password).then(() => {
+    toast.success('login successfully')
+    navigate(from)
+   }).catch((err) => {
+    toast.error(err.message)
+   });
   };
-
-  // form submit handler
-  // const handleSubmit = async (event) => {
-  //   event.preventDefault();
-  //   const form = event.target;
-  //   const name = form.name.value;
-  //   const email = form.email.value;
-  //   const password = form.password.value;
-
-  //   try {
-  //     //2. User Registration
-  //     const result = await createUser(email, password);
-
-  //     //3. Save username & profile photo
-  //     await updateUserProfile(
-  //       name,
-  //       "https://lh3.googleusercontent.com/a/ACg8ocKUMU3XIX-JSUB80Gj_bYIWfYudpibgdwZE1xqmAGxHASgdvCZZ=s96-c"
-  //     );
-  //     console.log(result);
-
-  //     navigate(from, { replace: true });
-  //     toast.success("Signup Successful");
-  //   } catch (err) {
-  //     console.log(err);
-  //     toast.error(err?.message);
-  //   }
-  // };
-
-  // Handle Google Signin
-  // const handleGoogleSignIn = async () => {
-  //   try {
-  //     //User Registration using google
-  //     await signInWithGoogle();
-
-  //     navigate(from, { replace: true });
-  //     toast.success("Signup Successful");
-  //   } catch (err) {
-  //     console.log(err);
-  //     toast.error(err?.message);
-  //   }
-  // };
   return (
     <div className="flex justify-center items-center min-h-screen">
       <div className="flex flex-col max-w-md p-6 rounded-md sm:p-10 bg-gray-100/10 text-gray-900">
@@ -70,7 +35,7 @@ const Login = () => {
           </h1>
         </div>
         <form
-          onSubmit={handleSubmit(handleEmployee)}
+          onSubmit={handleSubmit(handleLogin)}
           noValidate=""
           action=""
           className="space-y-6 ng-untouched ng-pristine ng-valid"
@@ -158,7 +123,7 @@ const Login = () => {
           </Link>
           or
           <Link
-            to="/employee"
+            to="/hrManager"
             className=" ml-1 hover:underline hover:text-[#9435E7] text-[#9435E7]"
           >
             HR Manager

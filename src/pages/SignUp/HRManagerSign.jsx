@@ -3,6 +3,7 @@ import useAuth from "../../hooks/useAuth";
 import { toast } from "react-hot-toast";
 import { TbFidgetSpinner } from "react-icons/tb";
 import { useForm } from "react-hook-form";
+import { imageUpload } from "../../ImageGenerate";
 
 const SignUp = () => {
   const { createUser, updateUserProfile, loading } = useAuth();
@@ -13,11 +14,29 @@ const SignUp = () => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors, isLoading },
   } = useForm();
 
-  const handleEmployee = (data) => {
-    console.log(data);
+  const handleEmployee = async (data) => {
+    console.log("from hr signin", data);
+    const { email, password, name, companyName, image, logo, date } = data;
+    const imageFile = image[0];
+    const logoFile = logo[0];
+    const imageURl = await imageUpload(imageFile);
+    const logoURL = await imageUpload(logoFile);
+    // console.log("from hr image url", imageURl, "from company logo", logoURL);
+    await createUser(email, password)
+      .then((currentUser) => {
+        console.log("from createUser", currentUser);
+        navigate("/dashboard");
+        reset();
+        toast.success("create user successfully");
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+    await updateUserProfile(name, imageURl);
   };
   return (
     <div className="flex justify-center items-center min-h-screen">
@@ -59,7 +78,7 @@ const SignUp = () => {
                 htmlFor="email"
                 className="block mb-2 text-sm text-gray-200"
               >
-               Company Name
+                Company Name
               </label>
               <input
                 type="text"
