@@ -4,11 +4,14 @@ import { toast } from "react-hot-toast";
 import { TbFidgetSpinner } from "react-icons/tb";
 import { useForm } from "react-hook-form";
 import { imageUpload } from "../../ImageGenerate";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
+import LoadingSpinner from "../../components/Shared/LoadingSpinner";
 
 const SignUp = () => {
   const { createUser, updateUserProfile, loading } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
+  const axiosInstance = useAxiosSecure();
   const from = location.state || "/";
 
   const {
@@ -22,12 +25,29 @@ const SignUp = () => {
     const { email, password, name, image, date } = data;
     const imageFile = image[0];
     const imageURl = await imageUpload(imageFile);
+    const employeeInfo = {
+      name,
+      email,
+      photoURL: imageURl,
+      dateOfBirth: date,
+      role: "employee",
+    };
+
+    console.log("employeeInfo", employeeInfo);
     await createUser(email, password)
       .then((currentUser) => {
+        if (loading) {
+          return <LoadingSpinner />;
+        }
         console.log("from createUser", currentUser);
-        navigate("/dashboard");
-        reset();
-        toast.success("create user successfully");
+        axiosInstance.post("/employee", employeeInfo).then((res) => {
+          console.log("after register", res.data);
+          if (res.data.insertedId) {
+            toast.success("Register successfully");
+            navigate("/dashboard");
+            reset();
+          }
+        });
       })
       .catch((err) => {
         console.log(err.message);
@@ -35,7 +55,6 @@ const SignUp = () => {
 
     await updateUserProfile(name, imageURl);
   };
-
 
   return (
     <div className="flex justify-center items-center min-h-screen">

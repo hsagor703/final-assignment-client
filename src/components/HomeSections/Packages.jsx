@@ -1,26 +1,16 @@
-import {motion} from 'framer-motion'
-const packagesData = [
-  {
-    name: "Basic",
-    employeeLimit: 5,
-    price: 5,
-    features: ["Asset Tracking", "Employee Management", "Basic Support"],
-  },
-  {
-    name: "Standard",
-    employeeLimit: 10,
-    price: 8,
-    features: ["All Basic features", "Advanced Analytics", "Priority Support"],
-  },
-  {
-    name: "Premium",
-    employeeLimit: 20,
-    price: 15,
-    features: ["All Standard features", "Custom Branding", "24/7 Support"],
-  },
-];
-
+import { motion } from "framer-motion";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
+import { useQuery } from "@tanstack/react-query";
 const Packages = () => {
+  const axiosInstance = useAxiosSecure();
+  const { data: packagesInfo = [] } = useQuery({
+    queryKey: ["packages"],
+    queryFn: async () => {
+      const res = await axiosInstance.get("/packages")
+      return res.data
+    },
+  });
+
   return (
     <section className="py-20 " id="pricing">
       <div className="max-w-7xl mx-auto px-6 md:px-10 lg:px-16">
@@ -37,7 +27,7 @@ const Packages = () => {
 
         {/* Pricing cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-          {packagesData.map((pack, i) => (
+          {packagesInfo.map((pack, i) => (
             <motion.div
               key={i}
               initial={{ opacity: 0, y: 20 }}

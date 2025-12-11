@@ -4,12 +4,14 @@ import { toast } from "react-hot-toast";
 import { TbFidgetSpinner } from "react-icons/tb";
 import { useForm } from "react-hook-form";
 import { imageUpload } from "../../ImageGenerate";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const SignUp = () => {
-  const { createUser, updateUserProfile, loading } = useAuth();
+  const { createUser, updateUserProfile, loading, user } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state || "/";
+  const axiosInstance = useAxiosSecure();
 
   const {
     register,
@@ -25,13 +27,32 @@ const SignUp = () => {
     const logoFile = logo[0];
     const imageURl = await imageUpload(imageFile);
     const logoURL = await imageUpload(logoFile);
+    const HRInfo = {
+      name,
+      companyName,
+      companyLogo: logoURL,
+      photoURL:imageURl,
+      email,
+      dateOfBirth: date,
+      role: "hr",
+      packageLimit: 5,
+      currentEmployees: 0,
+      subscription: "basic",
+    };
+
+    console.log("hrInfo", HRInfo);
     // console.log("from hr image url", imageURl, "from company logo", logoURL);
     await createUser(email, password)
       .then((currentUser) => {
         console.log("from createUser", currentUser);
-        navigate("/dashboard");
-        reset();
-        toast.success("create user successfully");
+        axiosInstance.post("/hrManager", HRInfo).then((res) => {
+          console.log("after register", res.data);
+          if (res.data.insertedId) {
+            toast.success("Register successfully");
+            navigate("/dashboard");
+            reset();
+          }
+        });
       })
       .catch((err) => {
         console.log(err.message);

@@ -1,17 +1,38 @@
 import React from "react";
 import Container from "../Container";
 import logo from "../../../assets/images/a-logo.png";
-import { Link, NavLink } from "react-router";
+import { href, Link, NavLink } from "react-router";
 import { FaHome } from "react-icons/fa";
 import { FaPeopleGroup } from "react-icons/fa6";
 import { GrUserManager } from "react-icons/gr";
 import { RxDashboard } from "react-icons/rx";
 import useAuth from "../../../hooks/useAuth";
 import toast from "react-hot-toast";
-import avatarImg from '../../../assets/images/placeholder.jpg'
+import avatarImg from "../../../assets/images/placeholder.jpg";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import { useQuery } from "@tanstack/react-query";
+import LoadingSpinner from "../LoadingSpinner";
+import useAxiosNormal from "../../../hooks/useAxiosNormal";
 
 const Navbar3 = () => {
   const { user, logOut } = useAuth();
+  const axiosNormal = useAxiosNormal();
+
+  const { data: HrManager = {} } = useQuery({
+    queryKey: ["HrManager", user?.email],
+    queryFn: async () => {
+      const res = await axiosNormal.get(`hrManager?email=${user?.email}`);
+      return res.data;
+    },
+  });
+
+  const { data: employee = {} } = useQuery({
+    queryKey: ["employee", user?.email],
+    queryFn: async () => {
+      const res = await axiosNormal.get(`employee?email=${user?.email}`);
+      return res.data;
+    },
+  });
 
   const handleLogout = () => {
     logOut().then(() => {
@@ -20,21 +41,6 @@ const Navbar3 = () => {
   };
   const links = (
     <>
-      {/* <li>
-        <NavLink to={"/"}>
-          <FaHome size={18} /> Home
-        </NavLink>
-      </li>
-      <li>
-        <NavLink to={"/employee"}>
-          <FaPeopleGroup size={18}/>
-          Join as Employee
-        </NavLink>
-      </li>
-      <li>
-        <NavLink to={"/hrManager"}> <GrUserManager size={18}/>Join as HR Manager</NavLink>
-      </li> */}
-
       {user ? (
         <>
           <li>
@@ -42,62 +48,68 @@ const Navbar3 = () => {
               <FaHome size={18} /> Home
             </NavLink>
           </li>
-          <li className="dropdown">
-            <div tabIndex={0} role="button" className=" ">
-              <FaPeopleGroup /> Employee
-            </div>
-            <ul
-              tabIndex="-1"
-              className="dropdown-content menu bg-base-100/10 rounded-box z-1 w-52 p-2 shadow-sm"
-            >
-              <li>
-                <Link>My Assets</Link>
-              </li>
-              <li>
-                <Link>My Team</Link>
-              </li>
-              <li>
-                <Link>Request Asset</Link>
-              </li>
-              <li>
-                <Link>Profile</Link>
-              </li>
-              <li>
-                <Link>Logout</Link>
-              </li>
-            </ul>
-          </li>
-          <li className="dropdown">
-            <div tabIndex={0} role="button" className=" ">
-              <GrUserManager /> HR Manager
-            </div>
-            <ul
-              tabIndex="-1"
-              className="dropdown-content menu bg-base-100/10 rounded-box z-1 w-52 p-2 shadow-sm"
-            >
-              <li>
-                <Link>Asset List</Link>
-              </li>
-              <li>
-                <Link>Add Asset</Link>
-              </li>
-              <li>
-                <Link>All Requests</Link>
-              </li>
-              <li>
-                <Link>Employee List</Link>
-              </li>
-              <li>
-                <Link>Profile</Link>
-              </li>
-              <li>
-                <Link>Logout</Link>
-              </li>
-            </ul>
-          </li>
+
+          {employee.role === "employee" && (
+            <li className="dropdown">
+              <div tabIndex={0} role="button" className=" ">
+                <FaPeopleGroup /> Employee
+              </div>
+              <ul
+                tabIndex="-1"
+                className="dropdown-content menu bg-base-100/10 rounded-box z-1 w-52 p-2 shadow-sm"
+              >
+                <li>
+                  <Link>My Assets</Link>
+                </li>
+                <li>
+                  <Link>My Team</Link>
+                </li>
+                <li>
+                  <Link>Request Asset</Link>
+                </li>
+                <li>
+                  <Link>Profile</Link>
+                </li>
+                <li>
+                  <Link>Logout</Link>
+                </li>
+              </ul>
+            </li>
+          )}
+
+          {HrManager.role === "hr" && (
+            <li className="dropdown">
+              <div tabIndex={0} role="button" className=" ">
+                <GrUserManager /> HR Manager
+              </div>
+              <ul
+                tabIndex="-1"
+                className="dropdown-content menu bg-base-100/10 rounded-box z-1 w-52 p-2 shadow-sm"
+              >
+                <li>
+                  <Link>Asset List</Link>
+                </li>
+                <li>
+                  <Link>Add Asset</Link>
+                </li>
+                <li>
+                  <Link>All Requests</Link>
+                </li>
+                <li>
+                  <Link>Employee List</Link>
+                </li>
+                <li>
+                  <Link>Profile</Link>
+                </li>
+                <li>
+                  <Link>Logout</Link>
+                </li>
+              </ul>
+            </li>
+          )}
+
           <li>
             <NavLink to={"/dashboard"}>
-              {" "}
               <RxDashboard />
               Dashboard
             </NavLink>
