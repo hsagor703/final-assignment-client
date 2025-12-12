@@ -59,19 +59,19 @@ const Navbar3 = () => {
                 className="dropdown-content menu bg-base-100/10 rounded-box z-1 w-52 p-2 shadow-sm"
               >
                 <li>
-                  <Link>My Assets</Link>
+                  <Link to={'/dashboard/my-asset'}>My Assets</Link>
                 </li>
                 <li>
-                  <Link>My Team</Link>
+                  <Link to={'/dashboard/my-team'}>My Team</Link>
                 </li>
                 <li>
-                  <Link>Request Asset</Link>
+                  <Link to={'/dashboard/request-assets'}>Request Assets</Link>
                 </li>
                 <li>
-                  <Link>Profile</Link>
+                  <Link to={'/dashboard/profile'}>Profile</Link>
                 </li>
                 <li>
-                  <Link>Logout</Link>
+                  <Link onClick={handleLogout} >Logout</Link>
                 </li>
               </ul>
             </li>
@@ -87,22 +87,22 @@ const Navbar3 = () => {
                 className="dropdown-content menu bg-base-100/10 rounded-box z-1 w-52 p-2 shadow-sm"
               >
                 <li>
-                  <Link>Asset List</Link>
+                  <Link to={'/dashboard/asset-list'}>Asset List</Link>
                 </li>
                 <li>
-                  <Link>Add Asset</Link>
+                  <Link to={'/dashboard/add-asset'}>Add Asset</Link>
                 </li>
                 <li>
-                  <Link>All Requests</Link>
+                  <Link to={'/dashboard/all-request'}>All Requests</Link>
                 </li>
                 <li>
-                  <Link>Employee List</Link>
+                  <Link to={'/dashboard/employee-list'}>Employee List</Link>
                 </li>
                 <li>
-                  <Link>Profile</Link>
+                  <Link to={'/dashboard/profile'}>Profile</Link>
                 </li>
                 <li>
-                  <Link>Logout</Link>
+                  <Link onClick={handleLogout} >Logout</Link>
                 </li>
               </ul>
             </li>
@@ -138,62 +138,7 @@ const Navbar3 = () => {
           </li>
         </>
       )}
-      {/* <li className="dropdown">
-        <div tabIndex={0} role="button" className=" ">
-          <FaPeopleGroup/> Employee
-        </div>
-        <ul
-          tabIndex="-1"
-          className="dropdown-content menu bg-base-100/10 rounded-box z-1 w-52 p-2 shadow-sm"
-        >
-          <li>
-            <Link>My Assets</Link>
-          </li>
-          <li>
-            <Link>My Team</Link>
-          </li>
-          <li>
-            <Link>Request Asset</Link>
-          </li>
-          <li>
-            <Link>Profile</Link>
-          </li>
-          <li>
-            <Link>Logout</Link>
-          </li>
-        </ul>
-      </li>
-      <li className="dropdown">
-        <div tabIndex={0} role="button" className=" ">
-          <GrUserManager/> HR Manager
-        </div>
-        <ul
-          tabIndex="-1"
-          className="dropdown-content menu bg-base-100/10 rounded-box z-1 w-52 p-2 shadow-sm"
-        >
-          <li>
-            <Link>Asset List</Link>
-          </li>
-          <li>
-            <Link>Add Asset</Link>
-          </li>
-          <li>
-            <Link>All Requests</Link>
-          </li>
-          <li>
-            <Link>Employee List</Link>
-          </li>
-          <li>
-            <Link>Profile</Link>
-          </li>
-          <li>
-            <Link>Logout</Link>
-          </li>
-        </ul>
-      </li>
-      <li>
-        <NavLink to={'/dashboard'}> <RxDashboard />Dashboard</NavLink>
-      </li> */}
+     
     </>
   );
   return (

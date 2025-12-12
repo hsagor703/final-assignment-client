@@ -16,6 +16,13 @@ import MyOrders from "../pages/Dashboard/Customer/MyOrders";
 import { createBrowserRouter } from "react-router";
 import JoinAsEmployee from "../pages/Employee/JoinAsEmployee";
 import HRManager from "../pages/HRManager/HRManager";
+import AssetList from "../components/Dashboard/Sidebar/Menu/hr/AssetList";
+import AddAsset from "../components/Dashboard/Sidebar/Menu/hr/AddAsset";
+import AllRequest from "../components/Dashboard/Sidebar/Menu/hr/AllRequest";
+import EmployeeList from "../components/Dashboard/Sidebar/Menu/hr/EmployeeList";
+import MyAsset from "../components/Dashboard/Sidebar/Menu/employee/MyAsset";
+import MyTeam from "../components/Dashboard/Sidebar/Menu/employee/MyTeam";
+import RequestAssets from "../components/Dashboard/Sidebar/Menu/employee/RequestAssets";
 // import LoginPage from "../pages/LoginPage/LoginPage";
 
 export const router = createBrowserRouter([
@@ -41,16 +48,11 @@ export const router = createBrowserRouter([
         path: "/hrManager",
         element: <HRManager />,
       },
-      // {
-      //   path: "loginPage",
-      //   Component: LoginPage,
-      // },
       { path: "/login", element: <Login/> },
-      // { path: "/signup", element: <SignUp /> },
+  
     ],
   },
-  // { path: "/login", element: <Login /> },
-  // { path: "/signup", element: <SignUp /> },
+ 
   {
     path: "/dashboard",
     element: (
@@ -104,6 +106,65 @@ export const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <MyOrders />
+          </PrivateRoute>
+        ),
+      },
+
+      // for hrManager 
+      {
+        path: "asset-list",
+        element: (
+          <PrivateRoute>
+            <AssetList/>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "add-asset",
+        element: (
+          <PrivateRoute>
+            <AddAsset />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "all-request",
+        element: (
+          <PrivateRoute>
+            <AllRequest />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "employee-list",
+        element: (
+          <PrivateRoute>
+            <EmployeeList />
+          </PrivateRoute>
+        ),
+      },
+      // for employee 
+      {
+        path: "my-asset",
+        element: (
+          <PrivateRoute>
+            <MyAsset />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "my-team",
+        element: (
+          <PrivateRoute>
+            <MyTeam />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "request-assets",
+        element: (
+          <PrivateRoute>
+            <RequestAssets />
           </PrivateRoute>
         ),
       },
