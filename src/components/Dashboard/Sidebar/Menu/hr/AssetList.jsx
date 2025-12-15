@@ -92,7 +92,7 @@ const AssetList = () => {
           label={"Asset List"}
         />
 
-        <div className=" ">
+        <div className="pl-4">
           <label className="input border border-[#9435E7] bg-[#18212F]">
             <svg
               className="h-[1em] opacity-50"
@@ -114,7 +114,7 @@ const AssetList = () => {
               onChange={(e) => setSearch(e.target.value)}
               type="search"
               required
-              placeholder="Search"
+              placeholder="Search by Name"
             />
           </label>
         </div>
