@@ -30,12 +30,11 @@ const MyAsset = () => {
   const modalRef = useRef(null);
   const [filter, setFilter] = useState("");
   const [search, setSearch] = useState("");
-
   const { refetch, data: requestData = [] } = useQuery({
-    queryKey: ["myAsset", search, filter],
+    queryKey: ["myAsset", search, filter, user?.email],
     queryFn: async () => {
       const res = await axiosInstance.get(
-        `/requestData?search=${search}&filter=${filter}`
+        `/requestData/?email=${user?.email}&search=${search}&filter=${filter}`
       );
       return res.data;
     },
@@ -147,9 +146,7 @@ const MyAsset = () => {
                 <td>
                   {request?.productInfo?.productType === "Returnable" &&
                     request?.status === "approve" && (
-                      <button
-                        className="btn btn-success btn-sm mr-2 text-xl border"
-                      >
+                      <button className="btn btn-success btn-sm mr-2 text-xl border">
                         <FaRegCheckCircle />
                         <span className="text-sm">Return</span>
                       </button>

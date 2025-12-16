@@ -1,4 +1,3 @@
-
 import { useQuery } from "@tanstack/react-query";
 import React, { useRef, useState } from "react";
 import useAxiosSecure from "../../../../../hooks/useAxiosSecure";
@@ -24,59 +23,48 @@ const AllRequest = () => {
     },
   });
 
-  // const handleEdit = (id) => {
-  //   setAssetId(id);
-  //   modalRef.current.showModal();
-  // };
+  const updateStatus = (data, status, quantity,id,productQuantity) => {
+    const updatedStatus = {
+      status: status,
+      quantity: quantity,
+      productId:id,
+      productQuantity:productQuantity
+    };
 
-  // const handleUpdateProduct = async (data) => {
-  //   const { name, image, productType, quantity } = data;
-  //   const imageFile = image[0];
-  //   const imageURL = await imageUpload(imageFile);
-  //   const updateInfo = {
-  //     productName: name,
-  //     productImage: imageURL,
-  //     productType,
-  //     productQuantity: Number(quantity),
-  //   };
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, approve it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosInstance
+          .patch(`/requestData/${data._id}`, updatedStatus)
+          .then((res) => {
+            if (res.data.modifiedCount) {
+              refetch();
+              Swal.fire({
+                title: `requested for ${data.productInfo.productName}`,
+                text: `request is ${status}`,
+                icon: "success",
+              });
+            }
+          });
+      }
+    });
+  };
 
-  //   await axiosInstance.patch(`/assets/${assetId}`, updateInfo).then((res) => {
-  //     if (res.data.modifiedCount) {
-  //       refetch();
-  //       modalRef.current.close();
-  //       Swal.fire({
-  //         title: "Updated",
-  //         text: "Your asset has been Updated.",
-  //         icon: "success",
-  //       });
-  //     }
-  //   });
-  // };
+  const handleApprove = (data) => {
+    updateStatus(data, "approve", 1, data.productInfo.productId, data.productInfo.productQuantity);
+  };
 
-  // const handleDelete = (id) => {
-  //   Swal.fire({
-  //     title: "Are you sure?",
-  //     text: "You won't be able to revert this!",
-  //     icon: "warning",
-  //     showCancelButton: true,
-  //     confirmButtonColor: "#3085d6",
-  //     cancelButtonColor: "#d33",
-  //     confirmButtonText: "Yes, delete it!",
-  //   }).then((result) => {
-  //     if (result.isConfirmed) {
-  //       axiosInstance.delete(`/assets/${id}`).then((res) => {
-  //         if (res?.data?.deletedCount) {
-  //           refetch();
-  //           Swal.fire({
-  //             title: "Deleted!",
-  //             text: "Your asset has been deleted.",
-  //             icon: "success",
-  //           });
-  //         }
-  //       });
-  //     }
-  //   });
-  // };
+  const handleReject = (data) => {
+    updateStatus(data, "reject");
+  };
+
   return (
     <div>
       <div className="overflow-x-auto border border-[#9435E7] text-gray-400 bg-[#18212F] rounded-xl">
@@ -146,22 +134,36 @@ const AllRequest = () => {
                 </td>
                 <td>{request.productInfo.productName}</td>
                 <td>{request.requestedDate}</td>
-                <td className={`${request.status === "pending" ? "text-amber-500" : request.status === "approve" ? "text-green-500" : "text-red-500"}`} >{request.status}</td>
+                <td
+                  className={`${
+                    request.status === "pending"
+                      ? "text-amber-500"
+                      : request.status === "approve"
+                      ? "text-green-500"
+                      : "text-red-500"
+                  }`}
+                >
+                  {request.status}
+                </td>
                 <th>
-                  <button
-                    onClick={"() => handleEdit(asset._id)"}
-                    className="btn btn-success btn-sm mr-2 text-xl border"
-                  >
-                    <FaRegCheckCircle />{" "}
-                    <span className="text-sm">Approve</span>
-                  </button>
-                  <button
-                    onClick={"() => handleDelete(asset._id)"}
-                    className="btn btn-error btn-sm text-xl"
-                  >
-                    <RiDeleteBack2Line />{" "}
-                    <span className="text-sm">Reject</span>
-                  </button>
+                  {request.status === "pending" && (
+                    <>
+                      <button
+                        onClick={() => handleApprove(request)}
+                        className="btn btn-success btn-sm mr-2 text-xl border"
+                      >
+                        <FaRegCheckCircle />
+                        <span className="text-sm">Approve</span>
+                      </button>
+                      <button
+                        onClick={() => handleReject(request)}
+                        className="btn btn-error btn-sm text-xl"
+                      >
+                        <RiDeleteBack2Line />
+                        <span className="text-sm">Reject</span>
+                      </button>
+                    </>
+                  )}
                 </th>
               </tr>
             ))}

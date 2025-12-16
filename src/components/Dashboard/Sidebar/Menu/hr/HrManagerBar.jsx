@@ -1,12 +1,13 @@
 import React from "react";
 import MenuItem from "../MenuItem";
 import { FaList } from "react-icons/fa";
-import { MdOutlineInstallMobile } from "react-icons/md";
+import { MdOutlineInstallMobile, MdPersonAddAlt1 } from "react-icons/md";
 import { MdAssignmentAdd } from "react-icons/md";
 import { FaPeopleGroup } from "react-icons/fa6";
 const HrManagerBar = () => {
   return (
     <div>
+      <h1 className="text-[#9435E7] border text-center">HR Manager </h1>
       <MenuItem
         icon={FaList}
         address={"/dashboard/asset-list"}
@@ -25,7 +26,12 @@ const HrManagerBar = () => {
       <MenuItem
         icon={FaPeopleGroup}
         address={"/dashboard/employee-list"}
-        label={"Employee List"}
+        label={"My Employee List"}
+      />
+      <MenuItem
+        icon={MdPersonAddAlt1}
+        address={"/dashboard/employee-add"}
+        label={"Add Employee"}
       />
     </div>
   );

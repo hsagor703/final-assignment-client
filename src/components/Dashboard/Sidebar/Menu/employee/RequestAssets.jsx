@@ -36,7 +36,7 @@ const AssetList = () => {
   const handleRequestProduct = async (data) => {
     const { textarea } = data;
     const requestInfo = {
-      requestedNote: textarea || "",
+      requestedNote: textarea || "my note",
       requestedDate: new Date().toLocaleDateString(),
       requestedPerson: user?.displayName,
       requestedEmail: user?.email,

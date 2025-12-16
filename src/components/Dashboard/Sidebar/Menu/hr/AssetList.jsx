@@ -173,13 +173,7 @@ const AssetList = () => {
         </table>
       </div>
 
-      {/* Open the modal using document.getElementById('ID').showModal() method */}
-      {/* <button
-        className="btn"
-        onClick={() => document.getElementById("my_modal_1").showModal()}
-      >
-        open modal
-      </button> */}
+     
       <dialog ref={modalRef} className="modal">
         <div className="modal-box max-w-lg mx-auto p-6 bg-[#18212F] text-gray-400 shadow-lg rounded-2xl border border-[#9435E7]">
           <h2 className="text-2xl font-semibold mb-6 text-center text-[#9435E7]">

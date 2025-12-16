@@ -55,7 +55,7 @@ const AddAsset = () => {
   return (
     <div className="max-w-lg mx-auto p-6 bg-[#18212F] text-gray-400 shadow-lg rounded-2xl border border-[#9435E7]">
       <h2 className="text-2xl font-semibold mb-6 text-center text-[#9435E7]">
-        Add New Product
+        Add New Asset
       </h2>
 
       <form onSubmit={handleSubmit(handleAddProduct)} className="space-y-5">

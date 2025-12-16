@@ -95,9 +95,7 @@ const Sidebar = () => {
               <CustomerMenu />
               <SellerMenu />
               <AdminMenu />
-              <h1 className="text-amber-300">hr </h1>
               {HrManager.role === "hr" && <HrManagerBar />}
-              <h1 className="text-amber-300">employee</h1>
               {employee.role === "employee" && <EmployeeBar />}
             </nav>
           </div>

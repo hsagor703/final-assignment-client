@@ -23,6 +23,7 @@ import EmployeeList from "../components/Dashboard/Sidebar/Menu/hr/EmployeeList";
 import MyAsset from "../components/Dashboard/Sidebar/Menu/employee/MyAsset";
 import MyTeam from "../components/Dashboard/Sidebar/Menu/employee/MyTeam";
 import RequestAssets from "../components/Dashboard/Sidebar/Menu/employee/RequestAssets";
+import AddEmployee from "../components/Dashboard/Sidebar/Menu/hr/AddEmployee";
 // import LoginPage from "../pages/LoginPage/LoginPage";
 
 export const router = createBrowserRouter([
@@ -140,6 +141,14 @@ export const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <EmployeeList />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "employee-add",
+        element: (
+          <PrivateRoute>
+            <AddEmployee />
           </PrivateRoute>
         ),
       },

@@ -9,3 +9,7 @@ a.active{
     @apply border border-[#9435E7] text-[#9435E7] font-bold
 }
     /* background: #19142D; */
+
+.myBtn{
+    @apply w-full bg-[#9435E7] text-white p-3 rounded-xl font-semibold hover:bg-[#9435E740] hover:text-[#9435E7] transition mt-3
+}
