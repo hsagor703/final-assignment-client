@@ -3,7 +3,7 @@ import MenuItem from "../MenuItem";
 import { FaList } from "react-icons/fa";
 import { MdOutlineInstallMobile, MdPersonAddAlt1 } from "react-icons/md";
 import { MdAssignmentAdd } from "react-icons/md";
-import { FaPeopleGroup } from "react-icons/fa6";
+import { FaBagShopping, FaPeopleGroup } from "react-icons/fa6";
 const HrManagerBar = () => {
   return (
     <div>
@@ -32,6 +32,11 @@ const HrManagerBar = () => {
         icon={MdPersonAddAlt1}
         address={"/dashboard/employee-add"}
         label={"Add Employee"}
+      />
+      <MenuItem
+        icon={FaBagShopping}
+        address={"/dashboard/packages"}
+        label={"Packages"}
       />
     </div>
   );

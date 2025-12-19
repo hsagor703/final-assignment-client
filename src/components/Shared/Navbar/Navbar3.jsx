@@ -21,7 +21,7 @@ const Navbar3 = () => {
   const { data: HrManager = {} } = useQuery({
     queryKey: ["HrManager", user?.email],
     queryFn: async () => {
-      const res = await axiosNormal.get(`hrManager?email=${user?.email}`);
+      const res = await axiosNormal.get(`/hrManager?email=${user?.email}`);
       return res.data;
     },
   });
@@ -29,10 +29,11 @@ const Navbar3 = () => {
   const { data: employee = {} } = useQuery({
     queryKey: ["employee", user?.email],
     queryFn: async () => {
-      const res = await axiosNormal.get(`employee?email=${user?.email}`);
+      const res = await axiosNormal.get(`/employee/${user?.email}`);
       return res.data;
     },
   });
+
 
   const handleLogout = () => {
     logOut().then(() => {

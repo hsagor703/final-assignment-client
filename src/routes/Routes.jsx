@@ -1,6 +1,6 @@
 import Home from "../pages/Home/Home";
 import ErrorPage from "../pages/ErrorPage";
-import Login from '../pages/Login/Login'
+import Login from "../pages/Login/Login";
 import SignUp from "../pages/SignUp/SignUp";
 import PlantDetails from "../pages/PlantDetails/PlantDetails";
 import PrivateRoute from "./PrivateRoute";
@@ -24,6 +24,7 @@ import MyAsset from "../components/Dashboard/Sidebar/Menu/employee/MyAsset";
 import MyTeam from "../components/Dashboard/Sidebar/Menu/employee/MyTeam";
 import RequestAssets from "../components/Dashboard/Sidebar/Menu/employee/RequestAssets";
 import AddEmployee from "../components/Dashboard/Sidebar/Menu/hr/AddEmployee";
+import Packages from "../components/Dashboard/Sidebar/Menu/hr/Packages";
 // import LoginPage from "../pages/LoginPage/LoginPage";
 
 export const router = createBrowserRouter([
@@ -49,11 +50,10 @@ export const router = createBrowserRouter([
         path: "/hrManager",
         element: <HRManager />,
       },
-      { path: "/login", element: <Login/> },
-  
+      { path: "/login", element: <Login /> },
     ],
   },
- 
+
   {
     path: "/dashboard",
     element: (
@@ -111,12 +111,12 @@ export const router = createBrowserRouter([
         ),
       },
 
-      // for hrManager 
+      // for hrManager
       {
         path: "asset-list",
         element: (
           <PrivateRoute>
-            <AssetList/>
+            <AssetList />
           </PrivateRoute>
         ),
       },
@@ -152,7 +152,7 @@ export const router = createBrowserRouter([
           </PrivateRoute>
         ),
       },
-      // for employee 
+      // for employee
       {
         path: "my-asset",
         element: (
@@ -174,6 +174,14 @@ export const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <RequestAssets />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "packages",
+        element: (
+          <PrivateRoute>
+            <Packages />
           </PrivateRoute>
         ),
       },

@@ -34,7 +34,7 @@ const Sidebar = () => {
   const { data: employee = {} } = useQuery({
     queryKey: ["employee", user?.email],
     queryFn: async () => {
-      const res = await axiosNormal.get(`employee?email=${user?.email}`);
+      const res = await axiosNormal.get(`/employee/${user?.email}`);
       return res.data;
     },
   });

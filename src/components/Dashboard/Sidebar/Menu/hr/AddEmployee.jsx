@@ -8,9 +8,13 @@ import { useForm } from "react-hook-form";
 import { RiFolderAddFill } from "react-icons/ri";
 import { FaPeopleGroup } from "react-icons/fa6";
 import { MdPersonAddAlt1 } from "react-icons/md";
+import useAxiosNormal from "../../../../../hooks/useAxiosNormal";
+import { BsCoin } from "react-icons/bs";
+import { Link } from "react-router";
 
 const AddEmployee = () => {
   const { user } = useAuth();
+  const axiosNormal = useAxiosNormal();
   console.log(user.uid);
   const axiosInstance = useAxiosSecure();
   const { data: employees = [] } = useQuery({
@@ -20,6 +24,15 @@ const AddEmployee = () => {
       return res.data;
     },
   });
+
+  const { data: HrManager = {} } = useQuery({
+    queryKey: ["HrManager", user?.email],
+    queryFn: async () => {
+      const res = await axiosNormal.get(`hrManager?email=${user?.email}`);
+      return res.data;
+    },
+  });
+
 
   const handleAdd = (data) => {
     const addInfo = {
@@ -74,15 +87,25 @@ const AddEmployee = () => {
                 <h2 className="card-title">Email: {employee.email}</h2>
 
                 <div className="card-actions ">
-                  <button
-                    onClick={() => handleAdd(employee)}
-                    className="w-full bg-[#9435E7] text-white p-3 rounded-xl font-semibold hover:bg-[#9435E740] hover:text-[#9435E7] transition"
-                  >
-                    <div className="flex items-center justify-center">
-                      <MdPersonAddAlt1 className="mr-2" />
-                      <span>Add</span>
-                    </div>
-                  </button>
+                  {HrManager?.currentEmployees === 5 ? (
+                    <Link to={'/dashboard/packages'} className="w-full bg-[#9435E7] text-white p-3 rounded-xl font-semibold hover:bg-[#9435E740] hover:text-[#9435E7] transition">
+                      <div className="flex items-center justify-center">
+                        <BsCoin color="yellow" size={22} className="mr-2" />
+                        <span>Upgrade Your Package</span>
+                      </div>
+                    </Link>
+                  ) : (
+                    <button
+                      onClick={() => handleAdd(employee)}
+                      className="w-full bg-[#9435E7] text-white p-3 rounded-xl font-semibold hover:bg-[#9435E740] hover:text-[#9435E7] transition"
+                    >
+                      <div className="flex items-center justify-center">
+                        <MdPersonAddAlt1 className="mr-2" />
+                        <span>Add</span>
+                      </div>
+                    </button>
+                  )}
+                 
                 </div>
               </div>
             </div>
