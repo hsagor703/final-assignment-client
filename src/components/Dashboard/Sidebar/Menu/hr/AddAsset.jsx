@@ -48,7 +48,7 @@ const AddAsset = () => {
           icon: "success",
           draggable: true,
         });
-        reset()
+        reset();
       }
     });
   };

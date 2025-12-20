@@ -15,7 +15,6 @@ import { Link } from "react-router";
 const AddEmployee = () => {
   const { user } = useAuth();
   const axiosNormal = useAxiosNormal();
-  console.log(user.uid);
   const axiosInstance = useAxiosSecure();
   const { data: employees = [] } = useQuery({
     queryKey: ["employees"],
@@ -25,25 +24,30 @@ const AddEmployee = () => {
     },
   });
 
-  const { data: HrManager = {} } = useQuery({
+  const {refetch, data: HrManager = {} } = useQuery({
     queryKey: ["HrManager", user?.email],
     queryFn: async () => {
-      const res = await axiosNormal.get(`hrManager?email=${user?.email}`);
+      const res = await axiosNormal.get(`/hrManager?email=${user?.email}`);
       return res.data;
     },
   });
 
-
-  const handleAdd = (data) => {
+  const handleAdd = (data, hr) => {
     const addInfo = {
       HRManagerUid: user.uid,
       assetCount: 0,
       joinDate: new Date().toLocaleDateString(),
+      hrManagerId: hr?._id,
+      hrEmail: hr?.email,
+      hrSubscribtion: hr?.subscription,
+      currentEmployees: hr?.currentEmployees,
+      hrAddedNewEmployee: 1,
     };
 
     axiosInstance.patch(`/employee/${data._id}`, addInfo).then((res) => {
       console.log(res.data);
       if (res.data.modifiedCount) {
+        refetch()
         Swal.fire({
           title: "Added",
           text: "Employee has been Added successfully.",
@@ -87,8 +91,11 @@ const AddEmployee = () => {
                 <h2 className="card-title">Email: {employee.email}</h2>
 
                 <div className="card-actions ">
-                  {HrManager?.currentEmployees === 5 ? (
-                    <Link to={'/dashboard/packages'} className="w-full bg-[#9435E7] text-white p-3 rounded-xl font-semibold hover:bg-[#9435E740] hover:text-[#9435E7] transition">
+                  {HrManager?.currentEmployees === 5 || HrManager?.currentEmployees === 10 || HrManager?.currentEmployees === 20 ? (
+                    <Link
+                      to={"/dashboard/packages"}
+                      className="w-full bg-[#9435E7] text-white p-3 rounded-xl font-semibold hover:bg-[#9435E740] hover:text-[#9435E7] transition"
+                    >
                       <div className="flex items-center justify-center">
                         <BsCoin color="yellow" size={22} className="mr-2" />
                         <span>Upgrade Your Package</span>
@@ -96,7 +103,7 @@ const AddEmployee = () => {
                     </Link>
                   ) : (
                     <button
-                      onClick={() => handleAdd(employee)}
+                      onClick={() => handleAdd(employee, HrManager)}
                       className="w-full bg-[#9435E7] text-white p-3 rounded-xl font-semibold hover:bg-[#9435E740] hover:text-[#9435E7] transition"
                     >
                       <div className="flex items-center justify-center">
@@ -105,7 +112,6 @@ const AddEmployee = () => {
                       </div>
                     </button>
                   )}
-                 
                 </div>
               </div>
             </div>

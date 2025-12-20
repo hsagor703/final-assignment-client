@@ -1,17 +1,3 @@
-// import React from "react";
-
-// const AllRequest = () => {
-//   return (
-//     <div>
-//       <h2 className="bg-gray-300">
-//         this is all request page Columns: Employee, Asset, Date, Status, Actions
-//         (show in tabular format) Status: Pending, Approved, Rejected
-//       </h2>
-//     </div>
-//   );
-// };
-
-// export default AllRequest;
 
 import { useQuery } from "@tanstack/react-query";
 import React, { useRef, useState } from "react";

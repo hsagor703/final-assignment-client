@@ -16,9 +16,9 @@ const AllRequest = () => {
   const [assetId, setAssetId] = useState();
   const [search, setSearch] = useState("");
   const { refetch, data: requestData = [] } = useQuery({
-    queryKey: ["requestData", search],
+    queryKey: ["requestData", search, user?.email],
     queryFn: async () => {
-      const res = await axiosInstance.get(`/requestData?search=${search}`);
+      const res = await axiosInstance.get(`/requestData?email=${user?.email}&search=${search}`);
       return res.data;
     },
   });

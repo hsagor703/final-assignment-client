@@ -10,9 +10,6 @@ import { BsGraphUp } from "react-icons/bs";
 
 // User Menu
 import MenuItem from "./Menu/MenuItem";
-import AdminMenu from "./Menu/AdminMenu";
-import SellerMenu from "./Menu/SellerMenu";
-import CustomerMenu from "./Menu/CustomerMenu";
 import HrManagerBar from "./Menu/hr/HrManagerBar";
 import EmployeeBar from "./Menu/employee/EmployeeBar";
 import useAxiosNormal from "../../../hooks/useAxiosNormal";
@@ -92,9 +89,7 @@ const Sidebar = () => {
                 address="/dashboard"
               />
               {/* Role-Based Menu */}
-              <CustomerMenu />
-              <SellerMenu />
-              <AdminMenu />
+              {/* <AdminMenu /> */}
               {HrManager.role === "hr" && <HrManagerBar />}
               {employee.role === "employee" && <EmployeeBar />}
             </nav>
