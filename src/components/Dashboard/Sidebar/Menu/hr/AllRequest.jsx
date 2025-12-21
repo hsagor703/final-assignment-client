@@ -40,7 +40,7 @@ const AllRequest = () => {
 
 
 
-  const updateStatus = (data, status, quantity,id,productQuantity,requestedEmail,requestedAsset, requestedId) => {
+  const updateStatus = (data, status, quantity,id,productQuantity,requestedEmail,requestedAsset, requestedId, hrEmail) => {
     const updatedStatus = {
       status: status,
       quantity: quantity,
@@ -48,9 +48,11 @@ const AllRequest = () => {
       productQuantity:productQuantity,
       requestedEmail,
       requestedAsset,
-      requestedId
-    };
+      requestedId,
+      hrEmail
 
+    };
+  
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -78,7 +80,7 @@ const AllRequest = () => {
   };
 
   const handleApprove = (data) => {
-    updateStatus(data, "approve", 1, data.productInfo.productId, data.productInfo.productQuantity,data.requestedEmail, data.requestedAsset, data.requestedId);
+    updateStatus(data, "approve", 1, data.productInfo.productId, data.productInfo.productQuantity,data.requestedEmail, data.requestedAsset, data.requestedId, user.email);
   };
 
   const handleReject = (data) => {

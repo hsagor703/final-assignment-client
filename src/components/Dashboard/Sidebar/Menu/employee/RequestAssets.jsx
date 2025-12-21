@@ -21,14 +21,16 @@ const AssetList = () => {
     },
   });
 
-  const {data:employeeData = {}} = useQuery({
-    queryKey:["employee", user?.email],
+  const { data: employeeData = {} } = useQuery({
+    queryKey: ["employee", user?.email],
     queryFn: async () => {
-      const res = await axiosInstance.get(`/employee/${user?.email}`)
-      return res.data
-    }
-  })
+      const res = await axiosInstance.get(`/employee/${user?.email}`);
+      return res.data;
+    },
+  });
 
+  const obj = Object.assign({},...assets)
+  const connectedCompany = employeeData?.connectedCompany?.find(c => c.hrEmail === obj.hrEmail)
 
   const {
     register,
@@ -52,8 +54,8 @@ const AssetList = () => {
       requestedPhotoURL: user?.photoURL,
       requestedUid: user?.uid,
       status: "pending",
-      requestedId:employeeData?._id,
-      requestedAsset:employeeData?.assetCount,
+      requestedId: employeeData?._id,
+      requestedAsset: connectedCompany?.assetCount,
       productInfo: {
         companyName: assetData?.companyName,
         dateAdded: assetData?.dateAdded,

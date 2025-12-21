@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
+import { Link } from "react-router";
 const Packages = () => {
   const axiosInstance = useAxiosSecure();
   const { data: packagesInfo = [] } = useQuery({
@@ -64,9 +65,9 @@ const Packages = () => {
               </ul>
 
               <div className="mt-8 text-center">
-                <button className="w-full py-3 bg-[#9435E7] text-white rounded-xl hover:bg-[#9435E760] transition font-semibold">
+                <Link to={'/dashboard/packages'} className="px-38 md:px-26 py-3 bg-[#9435E7] text-white rounded-xl hover:bg-[#9435E760] transition font-semibold">
                   Select Plan
-                </button>
+                </Link>
               </div>
             </motion.div>
           ))}

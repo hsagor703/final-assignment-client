@@ -42,6 +42,8 @@ const AddEmployee = () => {
       hrSubscribtion: hr?.subscription,
       currentEmployees: hr?.currentEmployees,
       hrAddedNewEmployee: 1,
+      hrCompanyName:hr?.companyName,
+      status:"connected",
     };
 
     axiosInstance.patch(`/employee/${data._id}`, addInfo).then((res) => {
@@ -91,7 +93,7 @@ const AddEmployee = () => {
                 <h2 className="card-title">Email: {employee.email}</h2>
 
                 <div className="card-actions ">
-                  {HrManager?.currentEmployees === 5 || HrManager?.currentEmployees === 10 || HrManager?.currentEmployees === 20 ? (
+                  {HrManager?.packageLimit === HrManager?.currentEmployees ? (
                     <Link
                       to={"/dashboard/packages"}
                       className="w-full bg-[#9435E7] text-white p-3 rounded-xl font-semibold hover:bg-[#9435E740] hover:text-[#9435E7] transition"

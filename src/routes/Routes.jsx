@@ -18,6 +18,7 @@ import AllRequest from "../components/Dashboard/Sidebar/Menu/hr/AllRequest";
 import EmployeeList from "../components/Dashboard/Sidebar/Menu/hr/EmployeeList";
 import MyAsset from "../components/Dashboard/Sidebar/Menu/employee/MyAsset";
 import MyTeam from "../components/Dashboard/Sidebar/Menu/employee/MyTeam";
+import MyTeam2 from "../components/Dashboard/Sidebar/Menu/employee/MyTeam";
 import RequestAssets from "../components/Dashboard/Sidebar/Menu/employee/RequestAssets";
 import AddEmployee from "../components/Dashboard/Sidebar/Menu/hr/AddEmployee";
 import Packages from "../components/Dashboard/Sidebar/Menu/hr/Packages";
@@ -127,6 +128,14 @@ export const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <MyTeam />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "my-team2",
+        element: (
+          <PrivateRoute>
+            <MyTeam2 />
           </PrivateRoute>
         ),
       },

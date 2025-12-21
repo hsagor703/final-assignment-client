@@ -194,12 +194,10 @@ const Navbar3 = () => {
             <div className="hidden md:block">
               {/* Avatar */}
               <img
-                className="rounded-full mr-2 border border-[#9435E7]"
+                className="rounded-full h-10 w-10 mr-2 border border-[#9435E7]"
                 referrerPolicy="no-referrer"
                 src={user && user.photoURL ? user.photoURL : avatarImg}
                 alt="profile"
-                height="40"
-                width="40"
               />
             </div>
             {user ? (

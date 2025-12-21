@@ -26,7 +26,6 @@ const MyAsset = () => {
     },
   });
 
-  console.log(requestData);
 
   const handleFilter = (e) => {
     setFilter(e.target.value);
@@ -85,7 +84,6 @@ const MyAsset = () => {
         <table className="table ">
           {/* head */}
           <thead>
-            , Status
             <tr className="text-[#9435E7]">
               <th>#</th>
               <th>Asset Name</th>
@@ -119,7 +117,7 @@ const MyAsset = () => {
                 </td>
                 <td>{request.productInfo.productType}</td>
                 <td>{request.productInfo.companyName}</td>
-                <td>{"Approve Date"}</td>
+                <td>{request.statusUpdateAt}</td>
                 <td
                   className={`${
                     request.status === "pending"

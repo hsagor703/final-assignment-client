@@ -3,9 +3,12 @@ import useAuth from "../../hooks/useAuth";
 import { toast } from "react-hot-toast";
 import { TbFidgetSpinner } from "react-icons/tb";
 import { useForm } from "react-hook-form";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { useState } from "react";
 
 const Login = () => {
   const { createUser, updateUserProfile, loading, signIn } = useAuth();
+  const [show, setShow] = useState(true)
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state || "/";
@@ -17,13 +20,15 @@ const Login = () => {
   } = useForm();
 
   const handleLogin = (data) => {
-    const {email, password} = data
-   signIn(email, password).then(() => {
-    toast.success('login successfully')
-    navigate(from)
-   }).catch((err) => {
-    toast.error(err.message)
-   });
+    const { email, password } = data;
+    signIn(email, password)
+      .then(() => {
+        toast.success("login successfully");
+        navigate(from);
+      })
+      .catch((err) => {
+        toast.error(err.message);
+      });
   };
   return (
     <div className="flex justify-center items-center min-h-screen">
@@ -41,7 +46,6 @@ const Login = () => {
           className="space-y-6 ng-untouched ng-pristine ng-valid"
         >
           <div className="space-y-4">
-           
             <div>
               <label
                 htmlFor="email"
@@ -60,7 +64,7 @@ const Login = () => {
                 <p className="text-red-500 text-sm">Email is Required</p>
               )}
             </div>
-            <div>
+            <div className="relative">
               <div className="flex justify-between">
                 <label
                   htmlFor="password"
@@ -70,7 +74,7 @@ const Login = () => {
                 </label>
               </div>
               <input
-                type="password"
+                type={show ? 'text' : 'password'}
                 {...register("password", {
                   required: true,
                   minLength: 6,
@@ -79,8 +83,13 @@ const Login = () => {
                 })}
                 autoComplete="new-password"
                 placeholder="*******"
-                className="w-full px-3 py-2 border rounded-md border-[#9435E7] focus:outline-[#9435E7] bg-[#9435E710] text-gray-300"
+                className=" w-full px-3 py-2 border rounded-md border-[#9435E7] focus:outline-[#9435E7] bg-[#9435E710] text-gray-300"
               />
+
+              <button onClick={() => setShow(!show)} type="button" className="absolute top-10 text-xl text-[#9435E7] right-3">
+                {show ? <FaEye /> : <FaEyeSlash />}
+                
+              </button>
               {errors.password?.type === "required" && (
                 <p className="text-red-500 text-sm">Password is Required</p>
               )}
@@ -96,7 +105,6 @@ const Login = () => {
                 </p>
               )}
             </div>
-          
           </div>
 
           <div>
@@ -112,14 +120,14 @@ const Login = () => {
             </button>
           </div>
         </form>
-       
+
         <p className="px-6 mt-2 text-sm text-center text-gray-300">
           Don't have an account register? <br />
           <Link
             to="/employee"
             className=" mr-1 hover:underline hover:text-[#9435E7] text-[#9435E7]"
           >
-            Employee 
+            Employee
           </Link>
           or
           <Link

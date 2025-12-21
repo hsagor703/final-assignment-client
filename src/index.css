@@ -11,5 +11,5 @@ a.active{
     /* background: #19142D; */
 
 .myBtn{
-    @apply w-full bg-[#9435E7] text-white p-3 rounded-xl font-semibold hover:bg-[#9435E740] hover:text-[#9435E7] transition mt-3
+    @apply  bg-[#9435E7] text-white p-3 rounded-xl font-semibold hover:bg-[#9435E740] hover:text-[#9435E7] transition mt-3
 }

@@ -5,10 +5,12 @@ import useAuth from "../../../../../hooks/useAuth";
 import { FaPeopleGroup, FaTrash } from "react-icons/fa6";
 import MenuItem from "../MenuItem";
 import Swal from "sweetalert2";
+import { Link } from "react-router";
 
 const EmployeeList = () => {
   const { user } = useAuth();
   const axiosInstance = useAxiosSecure();
+  const [company, setCompany] = useState([])
   const [search, setSearch] = useState("");
   const { refetch, data: myEmployee = [] } = useQuery({
     queryKey: ["myEmployee", search],
@@ -20,7 +22,17 @@ const EmployeeList = () => {
     },
   });
 
-  const handleRemoveEmployee = (id) => {
+
+  const { data: HrManager = {} } = useQuery({
+      queryKey: ["HrManager", user?.email],
+      queryFn: async () => {
+        const res = await axiosNormal.get(`/hrManager?email=${user?.email}`);
+        return res.data;
+      },
+    });
+
+
+  const handleRemoveEmployee = (id, hrId) => {
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -31,7 +43,7 @@ const EmployeeList = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        axiosInstance.delete(`/employee/${id}`).then((res) => {
+        axiosInstance.delete(`/employee/${id}?hrId=${hrId}`).then((res) => {
           if (res?.data?.deletedCount) {
             refetch();
             Swal.fire({
@@ -93,8 +105,11 @@ const EmployeeList = () => {
             </tr>
           </thead>
           <tbody>
-            {myEmployee.map((employee, i) => (
-              <tr key={employee._id}>
+            {myEmployee.map((employee, i) => {
+              const filterConnectedCompany = employee.connectedCompany.find(c =>c.HRManagerUid === user?.uid)
+              // console.log(filterConnectedCompany);
+              return (
+                 <tr key={employee._id}>
                 <td>{i + 1}</td>
                 <td>
                   <div className="flex items-center gap-3">
@@ -112,20 +127,59 @@ const EmployeeList = () => {
                   </div>
                 </td>
                 <td>{employee.email}</td>
-                <td>{employee.assetCount}</td>
-                <td>{employee.joinDate}</td>
+                <td>{filterConnectedCompany.assetCount}</td>
+                <td>{filterConnectedCompany.joinDate}</td>
                 <th>
                   <button
-                    onClick={() => handleRemoveEmployee(employee._id)}
+                    onClick={() => handleRemoveEmployee(employee._id,HrManager?._id)}
                     className="btn btn-ghost btn-error btn-sm text-xl"
                   >
                     <FaTrash />
                   </button>
                 </th>
               </tr>
-            ))}
+              )
+            }
+              // const filterConnectedCompany = employee.fiter(Connect)
+              // <tr key={employee._id}>
+              //   <td>{i + 1}</td>
+              //   <td>
+              //     <div className="flex items-center gap-3">
+              //       <div className="avatar">
+              //         <div className="mask mask-squircle h-12 w-12">
+              //           <img
+              //             src={employee.photoURL}
+              //             alt="Avatar Tailwind CSS Component"
+              //           />
+              //         </div>
+              //       </div>
+              //       <div>
+              //         <div className="font-bold">{employee.name}</div>
+              //       </div>
+              //     </div>
+              //   </td>
+              //   <td>{employee.email}</td>
+              //   <td>{employee.assetCount}</td>
+              //   <td>{employee.joinDate}</td>
+              //   <th>
+              //     <button
+              //       onClick={() => handleRemoveEmployee(employee._id,HrManager?._id)}
+              //       className="btn btn-ghost btn-error btn-sm text-xl"
+              //     >
+              //       <FaTrash />
+              //     </button>
+              //   </th>
+              // </tr>
+            )}
           </tbody>
         </table>
+
+        <div className="border-t border-[#9435E7]"></div>
+
+        <div className="grid justify-center mt-3">
+          <h2 className="text-center w-62 p-3 rounded-sm  border border-[#9435E7] text-[#9435E7]">{myEmployee.length}/{HrManager.packageLimit} Employee Used</h2>
+          <Link to={'/dashboard/employee-add'} className="myBtn w-62 mb-5 text-center">Add Employee</Link>
+        </div>
       </div>
     </div>
   );

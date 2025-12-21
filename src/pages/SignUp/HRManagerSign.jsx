@@ -5,9 +5,12 @@ import { TbFidgetSpinner } from "react-icons/tb";
 import { useForm } from "react-hook-form";
 import { imageUpload } from "../../ImageGenerate";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import { useState } from "react";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 const SignUp = () => {
   const { createUser, updateUserProfile, loading, user } = useAuth();
+  const [show, setShow] = useState(true)
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state || "/";
@@ -31,7 +34,7 @@ const SignUp = () => {
       name,
       companyName,
       companyLogo: logoURL,
-      photoURL:imageURl,
+      photoURL: imageURl,
       email,
       dateOfBirth: date,
       role: "hr",
@@ -172,7 +175,7 @@ const SignUp = () => {
                 <p className="text-red-500 text-sm">Email is Required</p>
               )}
             </div>
-            <div>
+            <div className="relative">
               <div className="flex justify-between">
                 <label
                   htmlFor="password"
@@ -182,7 +185,7 @@ const SignUp = () => {
                 </label>
               </div>
               <input
-                type="password"
+                type={show?"text":"password"}
                 {...register("password", {
                   required: true,
                   minLength: 6,
@@ -193,6 +196,13 @@ const SignUp = () => {
                 placeholder="*******"
                 className="w-full px-3 py-2 border rounded-md border-[#9435E7] focus:outline-[#9435E7] bg-[#9435E710] text-gray-300"
               />
+              <button
+                onClick={() => setShow(!show)}
+                type="button"
+                className="absolute top-10 text-xl text-[#9435E7] right-3"
+              >
+                {show ? <FaEye /> : <FaEyeSlash />}
+              </button>
               {errors.password?.type === "required" && (
                 <p className="text-red-500 text-sm">Password is Required</p>
               )}
