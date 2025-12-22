@@ -48,7 +48,6 @@ const AddAsset = () => {
           draggable: true,
         });
         reset();
-        setLoading(false);
       }
     });
   };

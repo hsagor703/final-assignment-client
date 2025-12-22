@@ -1,11 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import useAxiosSecure from "../../../../../hooks/useAxiosSecure";
 import useAuth from "../../../../../hooks/useAuth";
 import MenuItem from "../MenuItem";
 import Swal from "sweetalert2";
 import { useForm } from "react-hook-form";
 import { RiFolderAddFill } from "react-icons/ri";
+import NoCompanyAffiliation from "../../../../Shared/NoCompanyAffiliation";
 
 const AssetList = () => {
   const { user } = useAuth();
@@ -13,6 +14,14 @@ const AssetList = () => {
   const modalRef = useRef(null);
   const [assetData, setAssetData] = useState({});
   const [search, setSearch] = useState("");
+
+  const [companies, setCompanies] = useState([]);
+  useEffect(() => {
+    axiosInstance.get(`/employee/companies/${user.email}`).then((res) => {
+      setCompanies(res.data);
+    });
+  }, [user.email]);
+
   const { refetch, data: assets = [] } = useQuery({
     queryKey: ["assets", search],
     queryFn: async () => {
@@ -29,8 +38,10 @@ const AssetList = () => {
     },
   });
 
-  const obj = Object.assign({},...assets)
-  const connectedCompany = employeeData?.connectedCompany?.find(c => c.hrEmail === obj.hrEmail)
+  const obj = Object.assign({}, ...assets);
+  const connectedCompany = employeeData?.connectedCompany?.find(
+    (c) => c.hrEmail === obj.hrEmail
+  );
 
   const {
     register,
@@ -82,122 +93,131 @@ const AssetList = () => {
   };
 
   return (
-    <div>
-      <div className="overflow-x-auto border border-[#9435E7] text-gray-400 bg-[#18212F] rounded-xl">
-        <MenuItem
-          icon={RiFolderAddFill}
-          address={"/dashboard/request-assets"}
-          label={"Request Assets"}
-        />
-
-        <div className="pl-4">
-          <label className="input border border-[#9435E7] bg-[#18212F]">
-            <svg
-              className="h-[1em] opacity-50"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-            >
-              <g
-                strokeLinejoin="round"
-                strokeLinecap="round"
-                strokeWidth="2.5"
-                fill="none"
-                stroke="currentColor"
-              >
-                <circle cx="11" cy="11" r="8"></circle>
-                <path d="m21 21-4.3-4.3"></path>
-              </g>
-            </svg>
-            <input
-              onChange={(e) => setSearch(e.target.value)}
-              type="search"
-              required
-              placeholder="Search"
+    <>
+      {companies.length === 0 ? (
+        <NoCompanyAffiliation />
+      ) : (
+        <div>
+          <div className="overflow-x-auto border border-[#9435E7] text-gray-400 bg-[#18212F] rounded-xl">
+            <MenuItem
+              icon={RiFolderAddFill}
+              address={"/dashboard/request-assets"}
+              label={"Request Assets"}
             />
-          </label>
-        </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 my-5 gap-5 px-4">
-          {assets.map((asset) => (
-            <div
-              key={asset._id}
-              className="card  shadow-sm  border border-gray-700"
-            >
-              <figure className="h-48 overflow-hidden">
-                <img
-                  src={asset.productImage}
-                  alt={asset.productName}
-                  className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
+            <div className="pl-4">
+              <label className="input border border-[#9435E7] bg-[#18212F]">
+                <svg
+                  className="h-[1em] opacity-50"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                >
+                  <g
+                    strokeLinejoin="round"
+                    strokeLinecap="round"
+                    strokeWidth="2.5"
+                    fill="none"
+                    stroke="currentColor"
+                  >
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <path d="m21 21-4.3-4.3"></path>
+                  </g>
+                </svg>
+                <input
+                  onChange={(e) => setSearch(e.target.value)}
+                  type="search"
+                  required
+                  placeholder="Search"
                 />
-              </figure>
-              <div className="card-body bg-[#18213F] rounded-b-2xl">
-                <h2 className="card-title">{asset.productName}</h2>
-                <h2 className="card-title">
-                  Quantity: <span className="">{asset.productQuantity}</span>
-                </h2>
-                <h2 className="card-title">
-                  Type: <span className="">{asset.productType}</span>
-                </h2>
-                <div className="card-actions ">
-                  {asset.productQuantity === 0 ? (
-                    <button className="w-full bg-[#9435E7] text-white p-3 rounded-xl font-semibold hover:bg-[#9435E740] hover:text-[#9435E7] transition">
-                      Not Available
-                    </button>
-                  ) : (
-                    <button
-                      onClick={() => handleRequest(asset)}
-                      className="w-full bg-[#9435E7] text-white p-3 rounded-xl font-semibold hover:bg-[#9435E740] hover:text-[#9435E7] transition"
-                    >
-                      Request
-                    </button>
-                  )}
+              </label>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 my-5 gap-5 px-4">
+              {assets.map((asset) => (
+                <div
+                  key={asset._id}
+                  className="card  shadow-sm  border border-gray-700"
+                >
+                  <figure className="h-48 overflow-hidden">
+                    <img
+                      src={asset.productImage}
+                      alt={asset.productName}
+                      className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
+                    />
+                  </figure>
+                  <div className="card-body bg-[#18213F] rounded-b-2xl">
+                    <h2 className="card-title">{asset.productName}</h2>
+                    <h2 className="card-title">
+                      Quantity:{" "}
+                      <span className="">{asset.productQuantity}</span>
+                    </h2>
+                    <h2 className="card-title">
+                      Type: <span className="">{asset.productType}</span>
+                    </h2>
+                    <div className="card-actions ">
+                      {asset.productQuantity === 0 ? (
+                        <button className="w-full bg-[#9435E7] text-white p-3 rounded-xl font-semibold hover:bg-[#9435E740] hover:text-[#9435E7] transition">
+                          Not Available
+                        </button>
+                      ) : (
+                        <button
+                          onClick={() => handleRequest(asset)}
+                          className="w-full bg-[#9435E7] text-white p-3 rounded-xl font-semibold hover:bg-[#9435E740] hover:text-[#9435E7] transition"
+                        >
+                          Request
+                        </button>
+                      )}
+                    </div>
+                  </div>
                 </div>
+              ))}
+            </div>
+          </div>
+
+          <dialog ref={modalRef} className="modal">
+            <div className="modal-box max-w-lg mx-auto p-6 bg-[#18212F] text-gray-400 shadow-lg rounded-2xl border border-[#9435E7]">
+              <h2 className="text-2xl font-semibold mb-6 text-center text-[#9435E7]">
+                Request Assets
+              </h2>
+
+              <form
+                onSubmit={handleSubmit(handleRequestProduct)}
+                className="space-y-5"
+              >
+                {/* Product Name */}
+                <div>
+                  <label className="font-semibold">
+                    {assetData?.productName}
+                  </label>
+                  <textarea
+                    type="text"
+                    cols={6}
+                    rows={4}
+                    className="w-full mt-2 p-3 border border-[#9435E7] rounded-xl focus:outline-[#9435E7] bg-[#9435E710] text-gray-300"
+                    placeholder="note"
+                    {...register("textarea")}
+                  />
+                </div>
+
+                {/* Submit Button */}
+                <button className="w-full bg-[#9435E7] text-white p-3 rounded-xl font-semibold hover:bg-[#9435E740] hover:text-[#9435E7] transition ">
+                  Submit
+                </button>
+              </form>
+
+              <div className="modal-action">
+                <form method="dialog">
+                  {/* if there is a button in form, it will close the modal */}
+                  <button className="w-full bg-[#9435E7] text-white p-3 rounded-xl font-semibold hover:bg-[#9435E740] hover:text-[#9435E7] transition mt-3">
+                    Close
+                  </button>
+                </form>
               </div>
             </div>
-          ))}
+          </dialog>
         </div>
-      </div>
-
-      <dialog ref={modalRef} className="modal">
-        <div className="modal-box max-w-lg mx-auto p-6 bg-[#18212F] text-gray-400 shadow-lg rounded-2xl border border-[#9435E7]">
-          <h2 className="text-2xl font-semibold mb-6 text-center text-[#9435E7]">
-            Request Assets
-          </h2>
-
-          <form
-            onSubmit={handleSubmit(handleRequestProduct)}
-            className="space-y-5"
-          >
-            {/* Product Name */}
-            <div>
-              <label className="font-semibold">{assetData?.productName}</label>
-              <textarea
-                type="text"
-                cols={6}
-                rows={4}
-                className="w-full mt-2 p-3 border border-[#9435E7] rounded-xl focus:outline-[#9435E7] bg-[#9435E710] text-gray-300"
-                placeholder="note"
-                {...register("textarea")}
-              />
-            </div>
-
-            {/* Submit Button */}
-            <button className="w-full bg-[#9435E7] text-white p-3 rounded-xl font-semibold hover:bg-[#9435E740] hover:text-[#9435E7] transition ">
-              Submit
-            </button>
-          </form>
-
-          <div className="modal-action">
-            <form method="dialog">
-              {/* if there is a button in form, it will close the modal */}
-              <button className="w-full bg-[#9435E7] text-white p-3 rounded-xl font-semibold hover:bg-[#9435E740] hover:text-[#9435E7] transition mt-3">
-                Close
-              </button>
-            </form>
-          </div>
-        </div>
-      </dialog>
-    </div>
+      )}
+    </>
   );
 };
 

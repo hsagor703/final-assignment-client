@@ -1,6 +1,8 @@
 // import { MdBusinessOff } from "react-icons/md";
 import { MdBusinessCenter } from "react-icons/md";
 import { Link } from "react-router";
+import { BsFillBagXFill } from "react-icons/bs";
+
 
 const NoCompanyAffiliation = () => {
   return (
@@ -8,7 +10,7 @@ const NoCompanyAffiliation = () => {
       <div className="bg-[#18212F] max-w-md w-full rounded-2xl shadow-lg p-8 text-center">
         {/* Icon */}
         <div className="flex justify-center mb-4">
-          <MdBusinessCenter  className="text-gray-400 text-6xl" />
+          <BsFillBagXFill   className="text-gray-400 text-6xl" />
         </div>
 
         {/* Title */}
