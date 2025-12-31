@@ -10,21 +10,21 @@ It simplifies HR operations, improves accountability, and prevents asset loss.
 # 🌐 Live URL
 
 Client: https://final-assignment-4c484.web.app/
-Server:https://final-assignment-server-swart.vercel.app/
+Server: https://final-assignment-server-swart.vercel.app/
 
 # 🚀 Key Features
 
-🔐 Role-based authentication (HR & Employee)
-🏢 HR can manage company assets (add, update, delete)
-👨‍💼 Employee can request assets
-✅ HR approval & rejection system
-📊 Asset tracking (returnable & non-returnable)
-📈 Dashboard with summary & charts
-💳 Subscription-based employee limits (Stripe payment)
-🔍 Search & filter assets and requests
-📱 Fully responsive UI
-🔒 Protected routes & authorization
-📦 npm Packages Used
+- 🔐 Role-based authentication (HR & Employee)
+- 🏢 HR can manage company assets (add, update, delete)
+- 👨‍💼 Employee can request assets
+- ✅ HR approval & rejection system
+- 📊 Asset tracking (returnable & non-returnable)
+- 📈 Dashboard with summary & charts
+- 💳 Subscription-based employee limits (Stripe payment)
+- 🔍 Search & filter assets and requests
+- 📱 Fully responsive UI
+- 🔒 Protected routes & authorization
+- 📦 npm Packages Used
 
 # Frontend
 
