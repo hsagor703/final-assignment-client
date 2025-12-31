@@ -9,8 +9,8 @@ It simplifies HR operations, improves accountability, and prevents asset loss.
 
 # 🌐 Live URL
 
-- Client: `https://final-assignment-4c484.web.app/`
-- Server: `https://final-assignment-server-swart.vercel.app/`
+- Client: ```https://final-assignment-4c484.web.app/```
+- Server: ```https://final-assignment-server-swart.vercel.app/```
 
 # 🚀 Key Features
 
@@ -51,17 +51,17 @@ It simplifies HR operations, improves accountability, and prevents asset loss.
 # ⚙️ Setup Instructions
 
 1️⃣ Clone the Repository
-`https://github.com/hsagor703/final-assignment-client.git`
+```https://github.com/hsagor703/final-assignment-client.git```
 
 2️⃣ Client Setup
-`cd assetverse-client
-npm install
-npm run dev`
+```cd assetverse-client```
+```npm install```
+```npm run dev```
 
 3️⃣ Server Setup
-`cd assetverse-server
-npm install
-nodemon index.`
+```cd assetverse-server```
+```npm install```
+```nodemon index.js```
 
 🔐 Environment Variables Configuration
 Client .env
