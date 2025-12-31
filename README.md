@@ -99,11 +99,6 @@ STRIPE_SECRET_KEY=your_stripe_secret_key
 SITE_DOMAIN=https://your-client-live-url.vercel.app
 ```
 
-# 🧪 Default Roles
-
-- HR Manager: Can manage assets & employees
-- Employee: Can request & track assigned assets
-
 📦 Dependencies
 ```
  "dependencies": {
@@ -125,3 +120,10 @@ SITE_DOMAIN=https://your-client-live-url.vercel.app
     "tailwindcss": "^4.1.17"
     }
 ```
+
+# 🧪 Default Roles
+
+- HR Manager: Can manage assets & employees
+- Employee: Can request & track assigned assets
+
+
