@@ -103,3 +103,25 @@ SITE_DOMAIN=https://your-client-live-url.vercel.app
 
 - HR Manager: Can manage assets & employees
 - Employee: Can request & track assigned assets
+
+📦 Dependencies
+```
+ "dependencies": {
+    "@headlessui/react": "^2.2.9",
+    "@tailwindcss/vite": "^4.1.17",
+    "@tanstack/react-query": "^5.90.12",
+    "axios": "^1.13.2",
+    "firebase": "^12.6.0",
+    "framer-motion": "^12.23.25",
+    "lucide-react": "^0.556.0",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "react-hook-form": "^7.68.0",
+    "react-hot-toast": "^2.6.0",
+    "react-icons": "^5.5.0",
+    "react-router": "^7.9.6",
+    "react-spinners": "^0.17.0",
+    "sweetalert2": "^11.26.4",
+    "tailwindcss": "^4.1.17"
+    }
+```
