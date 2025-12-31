@@ -9,8 +9,8 @@ It simplifies HR operations, improves accountability, and prevents asset loss.
 
 # 🌐 Live URL
 
-Client: https://final-assignment-4c484.web.app/
-Server:https://final-assignment-server-swart.vercel.app/
+`Client: https://final-assignment-4c484.web.app/
+Server:https://final-assignment-server-swart.vercel.app/`
 
 # 🚀 Key Features
 
