@@ -11,7 +11,6 @@ import TestimonialsStats from "../../components/HomeSections/Testimonials";
 import useAuth from "../../hooks/useAuth";
 import useAxiosNormal from "../../hooks/useAxiosNormal";
 import { BlogsSection } from "../../components/HomeSections/BlogSection";
-import { NewsletterSection } from "../../components/HomeSections/NewsletterSection";
 
 const Home = () => {
   const { user } = useAuth();
@@ -32,8 +31,7 @@ const Home = () => {
       {HrManager.role === "hr" && <Packages />}
       <FeaturesShowcase />
       <TestimonialsStats />
-      <BlogsSection/>
-      {/* <NewsletterSection/> */}
+      <BlogsSection />
       <HowItWorks />
       <FAQ />
       <ContactCTA />
