@@ -25,6 +25,7 @@ import Packages from "../components/Dashboard/Sidebar/Menu/hr/Packages";
 import PaymentSuccess from "../components/Dashboard/Sidebar/Menu/hr/PaymentSuccess";
 import PaymentCancel from "../components/Dashboard/Sidebar/Menu/hr/PaymentCancel";
 import PaymentInfo from "../components/Dashboard/Sidebar/Menu/hr/PaymentInfo";
+import About from "../pages/about/About";
 // import LoginPage from "../pages/LoginPage/LoginPage";
 
 export const router = createBrowserRouter([
@@ -46,6 +47,7 @@ export const router = createBrowserRouter([
         path: "/hrManager",
         element: <HRManager />,
       },
+      { path: "/about", element: <About /> },
       { path: "/login", element: <Login /> },
     ],
   },

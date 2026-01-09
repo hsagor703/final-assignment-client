@@ -3,7 +3,7 @@ import Container from "../Container";
 import logo from "../../../assets/images/a-logo.png";
 import { href, Link, NavLink } from "react-router";
 import { FaHome } from "react-icons/fa";
-import { FaPeopleGroup } from "react-icons/fa6";
+import { FaCircleInfo, FaPeopleGroup } from "react-icons/fa6";
 import { GrUserManager } from "react-icons/gr";
 import { RxDashboard } from "react-icons/rx";
 import useAuth from "../../../hooks/useAuth";
@@ -13,6 +13,9 @@ import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import LoadingSpinner from "../LoadingSpinner";
 import useAxiosNormal from "../../../hooks/useAxiosNormal";
+import { CgProfile } from "react-icons/cg";
+import { FiInfo } from "react-icons/fi";
+import { IoHomeOutline } from "react-icons/io5";
 
 const Navbar3 = () => {
   const { user, logOut, loading } = useAuth();
@@ -34,7 +37,6 @@ const Navbar3 = () => {
     },
   });
 
-
   const handleLogout = () => {
     logOut().then(() => {
       toast.success("LogOut successfully");
@@ -42,7 +44,7 @@ const Navbar3 = () => {
   };
 
   if (loading) {
-    return <LoadingSpinner/>
+    return <LoadingSpinner />;
   }
   const links = (
     <>
@@ -50,7 +52,7 @@ const Navbar3 = () => {
         <>
           <li>
             <NavLink to={"/"}>
-              <FaHome size={18} /> Home
+              <IoHomeOutline size={18} /> Home
             </NavLink>
           </li>
 
@@ -64,19 +66,19 @@ const Navbar3 = () => {
                 className="dropdown-content menu bg-base-100/10 rounded-box z-1 w-52 p-2 shadow-sm"
               >
                 <li>
-                  <Link to={'/dashboard/my-asset'}>My Assets</Link>
+                  <Link to={"/dashboard/my-asset"}>My Assets</Link>
                 </li>
                 <li>
-                  <Link to={'/dashboard/my-team'}>My Team</Link>
+                  <Link to={"/dashboard/my-team"}>My Team</Link>
                 </li>
                 <li>
-                  <Link to={'/dashboard/request-assets'}>Request Assets</Link>
+                  <Link to={"/dashboard/request-assets"}>Request Assets</Link>
                 </li>
                 <li>
-                  <Link to={'/dashboard/profile'}>Profile</Link>
+                  <Link to={"/dashboard/profile"}>Profile</Link>
                 </li>
                 <li>
-                  <Link onClick={handleLogout} >Logout</Link>
+                  <Link onClick={handleLogout}>Logout</Link>
                 </li>
               </ul>
             </li>
@@ -92,22 +94,22 @@ const Navbar3 = () => {
                 className="dropdown-content menu bg-base-100/10 rounded-box z-1 w-52 p-2 shadow-sm"
               >
                 <li>
-                  <Link to={'/dashboard/asset-list'}>Asset List</Link>
+                  <Link to={"/dashboard/asset-list"}>Asset List</Link>
                 </li>
                 <li>
-                  <Link to={'/dashboard/add-asset'}>Add Asset</Link>
+                  <Link to={"/dashboard/add-asset"}>Add Asset</Link>
                 </li>
                 <li>
-                  <Link to={'/dashboard/all-request'}>All Requests</Link>
+                  <Link to={"/dashboard/all-request"}>All Requests</Link>
                 </li>
                 <li>
-                  <Link to={'/dashboard/employee-list'}>Employee List</Link>
+                  <Link to={"/dashboard/employee-list"}>Employee List</Link>
                 </li>
                 <li>
-                  <Link to={'/dashboard/profile'}>Profile</Link>
+                  <Link to={"/dashboard/profile"}>Profile</Link>
                 </li>
                 <li>
-                  <Link onClick={handleLogout} >Logout</Link>
+                  <Link onClick={handleLogout}>Logout</Link>
                 </li>
               </ul>
             </li>
@@ -117,6 +119,12 @@ const Navbar3 = () => {
             <NavLink to={"/dashboard"}>
               <RxDashboard />
               Dashboard
+            </NavLink>
+          </li>
+          <li>
+            <NavLink NavLink to={"/dashboard/profile"}>
+              <CgProfile size={18} />
+              Profile
             </NavLink>
           </li>
         </>
@@ -136,14 +144,18 @@ const Navbar3 = () => {
           </li>
           <li>
             <NavLink to={"/hrManager"}>
-              {" "}
               <GrUserManager size={18} />
               Join as HR Manager
             </NavLink>
           </li>
         </>
       )}
-     
+      <li>
+        <NavLink NavLink to={"/about"}>
+          <FiInfo size={18} />
+          About
+        </NavLink>
+      </li>
     </>
   );
   return (
@@ -151,7 +163,7 @@ const Navbar3 = () => {
       <Container>
         <div className="navbar px-0 ">
           <div className="navbar-start">
-            <div className="dropdown">
+            <div className=" dropdown lg:border-0 border border-[#9435E7] rounded-sm ">
               <div
                 tabIndex={0}
                 role="button"
@@ -203,7 +215,7 @@ const Navbar3 = () => {
             {user ? (
               <button
                 onClick={handleLogout}
-                className="btn bg-[#9435E7] text-gray-200 border border-[#9435E7]"
+                className="inline-flex items-center justify-center rounded-md bg-[#9435E7] hover:bg-[#9435E730] text-white font-semibold px-5 py-3 text-sm shadow-md focus:outline-none focus:ring-2 focus:ring-sky-400 focus:ring-offset-2"
               >
                 Logout
               </button>

@@ -3,8 +3,8 @@ import Container from "../Shared/Container";
 const ContactCTA = () => {
   return (
     <Container>
-      <div className="px-5 ">
-        <div className="py-20 px-3 bg-[#18212F] border border-[#9435E7] rounded-xl text-center">
+      <div className="">
+        <div className="py-20 bg-[#18212F] border border-[#9435E7] rounded-xl text-center">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}

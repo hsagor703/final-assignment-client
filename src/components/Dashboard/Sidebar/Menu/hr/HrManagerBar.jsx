@@ -1,7 +1,7 @@
 import React from "react";
 import MenuItem from "../MenuItem";
 import { FaList } from "react-icons/fa";
-import { MdOutlineInstallMobile, MdPersonAddAlt1 } from "react-icons/md";
+import { MdOutlineInstallMobile, MdPayment, MdPersonAddAlt1 } from "react-icons/md";
 import { MdAssignmentAdd } from "react-icons/md";
 import { FaBagShopping, FaPeopleGroup } from "react-icons/fa6";
 const HrManagerBar = () => {
@@ -38,6 +38,11 @@ const HrManagerBar = () => {
         address={"/dashboard/packages"}
         label={"Packages"}
       />
+        <MenuItem
+          icon={MdPayment}
+          address={"/dashboard/payment-info"}
+          label={"PaymentInfo"}
+        />
     </div>
   );
 };

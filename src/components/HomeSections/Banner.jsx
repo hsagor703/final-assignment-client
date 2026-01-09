@@ -48,7 +48,7 @@ const HeroBanner = ({
           <circle cx="300" cy="300" r="300" fill="url(#g1)" />
         </svg>
 
-        <div className=" px-5  py-20 md:py-28">
+        <div className="   py-20 md:py-28">
           <motion.div
             className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center"
             initial="hidden"

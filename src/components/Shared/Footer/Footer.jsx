@@ -1,12 +1,12 @@
 import { Link } from "react-router";
 import logo from "../../../assets/images/a-logo.png";
 import Container from "../Container";
-
+import { FaFacebook, FaGithub, FaLinkedin } from "react-icons/fa";
 const Footer = () => {
   return (
     <footer className="bg-gray-900 text-gray-300 py-10 mt-10">
       <Container>
-        <div className=" px-5 md:px-0 grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className=" md:px-0 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           <div>
             <Link to="/" className="flex items-center">
               <img src={logo} alt="logo" width="40" height="100" />
@@ -25,19 +25,6 @@ const Footer = () => {
             </h3>
             <p>Email: support@assetverse.com</p>
             <p>Phone: +123 456 7890</p>
-
-            {/* Social Media */}
-            <div className="flex gap-4 mt-3">
-              <a href="#" className="hover:text-white">
-                Facebook
-              </a>
-              <a href="#" className="hover:text-white">
-                Twitter
-              </a>
-              <a href="#" className="hover:text-white">
-                LinkedIn
-              </a>
-            </div>
           </div>
 
           <div>
@@ -51,21 +38,33 @@ const Footer = () => {
                 </a>
               </li>
               <li>
-                <a href="/join-employee" className="hover:text-white">
+                <a href="/employee" className="hover:text-white">
                   Join as Employee
                 </a>
               </li>
               <li>
-                <a href="/join-hr" className="hover:text-white">
+                <a href="/hrManager" className="hover:text-white">
                   Join as HR Manager
                 </a>
               </li>
-              <li>
-                <a href="/contact" className="hover:text-white">
-                  Contact
-                </a>
-              </li>
             </ul>
+          </div>
+          {/* Social Media */}
+          <div className="">
+            <h3 className="text-lg font-semibold text-white mb-3">
+              Social Links
+            </h3>
+            <div className="flex gap-4 mt-3">
+              <a href="https://www.facebook.com/sagor.sagorhasan.127/" target="_blank" className="text-[#1877F2] text-2xl h">
+                <FaFacebook />
+              </a>
+              <a href="https://github.com/hsagor703" target="_blank" className="text-white text-2xl">
+                <FaGithub />
+              </a>
+              <a href="https://www.linkedin.com/in/jonyshagor703/" target="_blank" className="text-[#0077B5] text-2xl">
+                <FaLinkedin />
+              </a>
+            </div>
           </div>
         </div>
       </Container>

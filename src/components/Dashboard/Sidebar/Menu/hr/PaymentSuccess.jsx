@@ -27,7 +27,7 @@ const PaymentSuccess = () => {
         <p className="text-gray-600 mb-6">
           Thank you for your purchase. Your order is being processed.
         </p>
-        <Link  className="myBtn">
+        <Link to={'/dashboard/payment-info'} className="myBtn">
          Payment History
         </Link>
       </div>

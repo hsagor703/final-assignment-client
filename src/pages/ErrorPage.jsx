@@ -35,7 +35,7 @@ const ErrorPage = () => {
               className="myBtn "
             >
               <span className="flex items-center justify-center  text-sm">
-                <FaArrowAltCircleLeft className="mr-2" /> <span>Home</span>
+                <FaArrowAltCircleLeft className="mr-2" /> <span>Back</span>
               </span>
             </button>
 
