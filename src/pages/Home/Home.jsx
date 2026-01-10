@@ -34,6 +34,7 @@ const Home = () => {
       <BlogsSection />
       <HowItWorks />
       <FAQ />
+      {/* this  */}
       <ContactCTA />
     </div>
   );
